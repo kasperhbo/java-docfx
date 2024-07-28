@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+   <property name="projectname" value="Docfx Java Doclet" />
+
+   <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+   <!-- encoders are assigned the type
+        ch.qos.logback.classic.encoder.PatternLayoutEncoder by default -->
+      <encoder>
+         <pattern>%d{yyyy:MM:dd HH:mm:ss.SSS} %-5level %logger{35}:%line - %msg%n%xEx</pattern>
+      </encoder>
+   </appender>
+     
+   <!--Daily rolling file appender -->
+   <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+
+      <!-- Support multiple-JVMs writing to the same log file -->
+      <prudent>true</prudent>
+      <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+         <fileNamePattern>log/${projectname}-.%d{yyyy-MM-dd}.log</fileNamePattern>
+         <maxHistory>30</maxHistory> 
+         <cleanHistoryOnStart>true</cleanHistoryOnStart>
+      </rollingPolicy>
+
+      <encoder>
+         <pattern>%d{HH:mm:ss.SSS} %-5level %logger{35}:%line - %msg%n</pattern>
+      </encoder>
+   </appender>
+
+   <root>
+      <level value="INFO" />
+      <appender-ref ref="STDOUT" />
+      <appender-ref ref="FILE" />
+   </root>
+</configuration>

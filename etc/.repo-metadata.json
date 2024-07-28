@@ -1,0 +1,19 @@
+{
+  "api_shortname": "order_bus",
+  "name_pretty": "Alcon Order Bus",
+  "product_documentation": "",
+  "client_documentation": "https://cloud.google.com/java/docs/reference/google-cloud-translate/latest/overview",
+  "rest_documentation": "https://cloud.google.com/translate/docs/reference/rest",
+  "rpc_documentation": "https://cloud.google.com/translate/docs/reference/rpc",
+  "issue_tracker": "https://issuetracker.google.com/savedsearches/559749",
+  "release_level": "accept",
+  "language": "java",
+  "repo": "hellebrekers/alcon/alcon-bus",
+  "repo_short": "alc-bus",
+  "distribution_name": "nl.hellebrekers.isa.alcon.bus.order:AlconBus",
+  "api_id": "alcon.bus.order",
+  "transport": "both",
+  "requires_billing": true,
+  "library_type": "GAPIC_COMBO",
+  "api_description": "Keeps the conections between the Alcon Bus and Visuallink"
+}
