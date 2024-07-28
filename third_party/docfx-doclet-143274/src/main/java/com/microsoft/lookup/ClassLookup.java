@@ -37,6 +37,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     List<ExtendedMetadataFileItem> inheritedMethods = new ArrayList<>();
 
     String packageName = determinePackageName(classElement);
+
     String classQName = String.valueOf(classElement.getQualifiedName());
     String classSName = String.valueOf(classElement.getSimpleName());
     String classQNameWithGenericsSupport = String.valueOf(classElement.asType());
@@ -52,6 +53,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     result.setFullName(classQNameWithGenericsSupport);
     result.setType(determineType(classElement));
     result.setPackageName(packageName);
+    result.setNamespace(packageName);
     result.setSummary(determineComment(classElement));
     result.setSuperclass(determineNestedSuperclass(classElement, result, inheritedMethods));
     result.setTypeParameters(determineTypeParameters(classElement));
@@ -200,7 +202,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
 
   List<String> determineInheritedMembers(List<ExtendedMetadataFileItem> inheritedMethods) {
 
-    if (inheritedMethods.size() > 0) {
+    if (!inheritedMethods.isEmpty()) {
       HashMap<String, ExtendedMetadataFileItem> map = new HashMap<>();
       for (ExtendedMetadataFileItem item : inheritedMethods) {
         String key = item.getName();
@@ -213,10 +215,8 @@ public class ClassLookup extends BaseLookup<TypeElement> {
           map.put(key, item);
         }
       }
-      List<String> methods =
-          map.values().stream().map(x -> x.getUid()).collect(Collectors.toList());
 
-      return methods;
+        return map.values().stream().map(MetadataFileItem::getUid).collect(Collectors.toList());
     }
     return new ArrayList<>();
   }
@@ -227,6 +227,7 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     return null;
   }
 
+  @Override
   public String extractJavaType(TypeElement element) {
     String superClass = determineSuperclass(element);
     if (superClass != null && superClass.contains("Exception")) {

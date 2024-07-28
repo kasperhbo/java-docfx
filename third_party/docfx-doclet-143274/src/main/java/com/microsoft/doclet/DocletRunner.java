@@ -11,16 +11,24 @@ import javax.tools.ToolProvider;
  * To use runner just pass as commandline param to main method: - name of file with doclet name,
  * parameter file, and argument file.
  *
- * <p>For example: <code>java DocletRunner $HOME/java-aiplatform/target/site/apidocs/options
+ * <p>For example: <code>
+ *     java DocletRunner /Users/brk/_hellebrekers/CUSTOMER/ALCON/overtheweeken/alconbus/target/site/apidocs/options
+ *     repoMetadataFilePath=/Users/brk/_hellebrekers/CUSTOMER/ALCON/overtheweeken/alconbus/repo-metadata.yaml
+ *     java DocletRunner $HOME/java-aiplatform/target/site/apidocs/options
  *     $HOME/java-aiplatform/target/site/apidocs/argfile</code>
  */
 public class DocletRunner {
 
-  public static void main(final String[] args) {
-    if (args.length < 1) {
+  public static void main(String[] args) {
+   /* if (args.length < 1) {
       System.err.println("Usage: java DocletRunner <options file> <argfile>");
       return;
-    }
+    }*/
+
+    String firstArg = "/Users/brk/_hellebrekers/0.VISSUALLINK/repos/Product/core/isacore/target/site/apidocs/options";
+    String secondArg = "/Users/brk/_hellebrekers/0.VISSUALLINK/repos/Product/core/isacore/target/site/apidocs/packages";
+
+    args = new String[] {firstArg, secondArg};
 
     run(
         args,

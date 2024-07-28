@@ -37,6 +37,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
   @Override
   protected ExtendedMetadataFileItem buildMetadataFileItem(Element element) {
     String packageName = determinePackageName(element);
+
     TypeElement classElement = (TypeElement) element.getEnclosingElement();
     String classQName = String.valueOf(classElement.getQualifiedName());
     String elementQName = String.valueOf(element);
@@ -45,6 +46,8 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         classQNameWithGenericsSupport.replace(packageName.concat("."), "");
     String uid = String.format("%s.%s", classQName, elementQName);
 
+
+    String namespace = packageName;
     ExtendedMetadataFileItem result =
         new ExtendedMetadataFileItem(uid) {
           {
@@ -54,6 +57,7 @@ public class ClassItemsLookup extends BaseLookup<Element> {
             setName(elementQName);
             setType(determineType(element));
             setPackageName(packageName);
+            setNamespace(namespace);
             setSummary(determineComment(element));
           }
         };

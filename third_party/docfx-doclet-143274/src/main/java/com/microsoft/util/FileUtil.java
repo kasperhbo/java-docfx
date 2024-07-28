@@ -9,6 +9,9 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public class FileUtil {
+  private FileUtil() {
+    // hide implicit public constructor
+  }
 
   /** Dump string to file. Create required folders when needed */
   public static void dumpToFile(String content, String fileName) {
@@ -18,7 +21,7 @@ public class FileUtil {
       Files.createDirectories(path.getParent());
       Files.write(path, content.getBytes());
     } catch (IOException ioe) {
-      throw new RuntimeException("Error during dump to file", ioe);
+      throw new CreateFileException("Error during dump to file", ioe);
     }
   }
 
@@ -33,4 +36,11 @@ public class FileUtil {
   public static void dumpToFile(PackageOverviewFile packageOverviewFile) {
     dumpToFile(packageOverviewFile.getFileContent(), packageOverviewFile.getFileNameWithPath());
   }
+
+  private static final class CreateFileException extends RuntimeException {
+    public CreateFileException(String message, Throwable cause) {
+      super(message, cause);
+    }
+  }
+
 }

@@ -1,70 +1,73 @@
 package com.microsoft.model;
 
 import com.google.common.base.MoreObjects;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class TocItem {
 
-  private String uid;
-  private String name;
+    private String uid;
+    private String name;
 
-  private String status;
+    private String status;
 
-  private String href;
+    private String href;
 
-  private Boolean packageOverview = false;
-  private String heading;
-  private List<TocItem> items = new ArrayList<>();
+    private String        heading;
+    private List<TocItem> items = new ArrayList<>();
 
-  public TocItem(String uid, String name) {
-    this.uid = uid;
-    this.name = name;
-  }
+    private Boolean packageOverview = false;//todo: unused?
 
-  public TocItem(String uid, String name, String href, boolean packageOverview) {
-    this.uid = uid;
-    this.name = name;
-    this.href = href;
-    this.packageOverview = packageOverview;
-  }
+    public TocItem(String uid, String name) {
+        this.uid  = uid;
+        this.name = name;
+    }
 
-  public TocItem(String uid, String name, String status) {
-    this.uid = uid;
-    this.name = name;
-    this.status = status;
-  }
+    public TocItem(String uid, String name, String href, boolean packageOverview) {
+        this.uid             = uid;
+        this.name            = name;
+        this.href            = href;
+        this.packageOverview = packageOverview;
+    }
 
-  public TocItem(String heading) {
-    this.heading = heading;
-  }
+    public TocItem(String uid, String name, String status) {
+        this.uid    = uid;
+        this.name   = name;
+        this.status = status;
+    }
 
-  public String getHref() {
-    return href;
-  }
+    public TocItem(String heading) {
+        this.heading = heading;
+    }
 
-  public String getUid() {
-    return uid;
-  }
+    public String getHref() {
+        return href;
+    }
 
-  public String getName() {
-    return name;
-  }
+    public String getUid() {
+        return uid;
+    }
 
-  public List<TocItem> getItems() {
-    return items;
-  }
+    public String getName() {
+        return name;
+    }
 
-  public String getStatus() {
-    return status;
-  }
+    public List<TocItem> getItems() {
+        return items;
+    }
 
-  public String getHeading() {
-    return heading;
-  }
+    public String getStatus() {
+        return status;
+    }
 
-  @Override
-  public String toString() {
-    return MoreObjects.toStringHelper(TocItem.class).add("uid", uid).toString();
-  }
+    public String getHeading() {
+        return heading;
+    }
+
+    @Override
+    public String toString() {
+        return MoreObjects.toStringHelper(TocItem.class)
+                .add("uid", uid).toString();
+    }
 }

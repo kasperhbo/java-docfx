@@ -4,6 +4,8 @@ package com.google.docfx.doclet;
 
 import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
+import jdk.javadoc.doclet.Reporter;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -169,6 +171,7 @@ public class RepoMetadata {
   public RepoMetadata parseRepoMetadata(String fileName) {
     Gson gson = new Gson();
     Path path = Paths.get(fileName);
+    System.out.println("Parsing " + path.toAbsolutePath().normalize());
     try (FileReader reader = new FileReader(path.toFile())) {
       return gson.fromJson(reader, RepoMetadata.class);
     } catch (IOException e) {

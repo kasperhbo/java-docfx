@@ -2,3 +2,6 @@
 .idea
 *.iml
 target/*
+/generated-files/*
+/generated-files-alconbus/*
+/docs/generated/*

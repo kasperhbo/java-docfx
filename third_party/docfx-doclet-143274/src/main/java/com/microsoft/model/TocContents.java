@@ -20,51 +20,53 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TocContents {
-  private final String projectName;
-  private final List<Object> contents = new ArrayList<>();
+    private final String       projectName;
+    private final List<Object> contents = new ArrayList<>();
 
-  public TocContents(
-      String projectName,
-      boolean disableChangelog,
-      boolean disableLibraryOverview,
-      List<TocItem> items) {
-    this.projectName = projectName;
-
-    if (projectName == null || projectName.equals("")) {
-      contents.addAll(items);
-    } else {
-      //  only include product hierarchy and guides if projectName included
-      createTocContents(projectName, disableChangelog, disableLibraryOverview, items);
+    public TocContents(
+            String projectName,
+            boolean disableChangelog,
+            boolean disableLibraryOverview,
+            List<TocItem> items
+    ) {
+        this.projectName = projectName;
+        if (projectName == null || projectName.equals("")) {
+            contents.addAll(items);
+        } else {
+            //  only include product hierarchy and guides if projectName included
+            createTocContents(projectName, disableChangelog, disableLibraryOverview, items);
+        }
     }
-  }
 
-  private void createTocContents(
-      String projectName,
-      boolean disableChangelog,
-      boolean disableLibraryOverview,
-      List<TocItem> items) {
-    List<Object> tocItems = new ArrayList<>();
-    // combine guides and tocItems
-    // If disableLibraryOverview is enabled, then generate old overview. Otherwise generate the new
-    // library overview.
-    if (!disableLibraryOverview) {
-      tocItems.add(new Guide("Overview", "overview.md"));
-    } else {
-      tocItems.add(new Guide("Overview", "overview.html"));
+    private void createTocContents(
+            String projectName,
+            boolean disableChangelog,
+            boolean disableLibraryOverview,
+            List<TocItem> items) {
+        List<Object> tocItems = new ArrayList<>();
+        // combine guides and tocItems
+        // If disableLibraryOverview is enabled, then generate old overview. Otherwise generate the new
+        // library overview.
+        if (!disableLibraryOverview) {
+            tocItems.add(new Guide("Overview", "overview.md"));
+        } else {
+            tocItems.add(new Guide("Overview", "overview.html"));
+        }
+        if (!disableChangelog) {
+            tocItems.add(new Guide("Version history", "history.md"));
+        }
+        tocItems.addAll(items);
+        // wrap guides + tocItems with product hierarchy
+        contents.add(new
+                ProjectContents(projectName, tocItems)
+        );
     }
-    if (!disableChangelog) {
-      tocItems.add(new Guide("Version history", "history.md"));
+
+    public List<Object> getContents() {
+        return contents;
     }
-    tocItems.addAll(items);
-    // wrap guides + tocItems with product hierarchy
-    contents.add(new ProjectContents(projectName, tocItems));
-  }
 
-  public List<Object> getContents() {
-    return contents;
-  }
-
-  public String getProjectName() {
-    return projectName;
-  }
+    public String getProjectName() {
+        return projectName;
+    }
 }
