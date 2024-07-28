@@ -6,7 +6,7 @@ target/*
 /generated-files-alconbus/*
 /docs/generated/*
 /docs/_toc.yml
-docfx.json
+
 .idea/java-docfx-doclet.iml
 _site/manifest.json
 generated-files/overview.md
