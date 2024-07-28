@@ -1,2 +1,7 @@
 
 *.xml
+/generated-files/docfx.json
+/.idea/java-docfx-doclet.iml
+/.github/_site/manifest.json
+/generated-files/overview.md
+/.github/_site/xrefmap.yml
