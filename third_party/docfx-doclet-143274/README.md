@@ -1,6 +1,6 @@
 # JavaDoc Doclet for DocFX
 
-This is an modified version of:
+This is a modified version of:
 [github.com/googleapis/java-docfx-doclet.git](https://github.com/googleapis/java-docfx-doclet.git)
 so you can also use for your docs and generate yml + MD files for your JavaDoc.
 
@@ -10,12 +10,18 @@ TODO:
 2. [ ] Make running the program easier
 3. [ ] Add more documentation
 4. [ ] Add more examples
-5. [ x ] Add namespace 
-Designed to generate YAML files from Javadoc output for DocFX consumption.
+5. [x] Add namespace
+6. [ ] Add usage instructions
+7. [ ] Add Templates
+
+   Designed to generate YAML files from Javadoc output for DocFX consumption.
 
 ## Features
 
 ## Usage
+
+## License
+[MIT License](https://opensource.org/licenses/MIT)
 
 ## Googles Original README
 at [github.com/googleapis/java-docfx-doclet.git](https://github.com/googleapis/java-docfx-doclet.git).
