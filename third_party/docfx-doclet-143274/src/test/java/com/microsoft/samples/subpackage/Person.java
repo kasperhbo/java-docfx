@@ -22,55 +22,100 @@ import java.util.Set;
  *   <li>Link that starts from '#' {@link #setLastName()}
  *   <li>Link with label {@link Set WordOne}
  * </ul>
- *
+ * <p>
  * This is an "at" symbol: {@literal @}
  *
+ * @param <T> the type parameter
  * @see Display
  */
 public class Person<T> {
 
   private String firstName;
   private String lastName;
-  public int age;
+    /**
+     * The Age.
+     */
+    public int age;
 
-  public String getFirstName() {
+    /**
+     * Gets first name.
+     *
+     * @return the first name
+     */
+    public String getFirstName() {
     return firstName;
   }
 
-  public void setFirstName(String firstName) {
+    /**
+     * Sets first name.
+     *
+     * @param firstName the first name
+     */
+    public void setFirstName(String firstName) {
     this.firstName = firstName;
   }
 
-  public String getLastName() {
+    /**
+     * Gets last name.
+     *
+     * @return the last name
+     */
+    public String getLastName() {
     return lastName;
   }
 
-  public void setLastName(String lastName) {
+    /**
+     * Sets last name.
+     *
+     * @param lastName the last name
+     */
+    public void setLastName(String lastName) {
     this.lastName = lastName;
   }
 
-  public void setLastName() {
+    /**
+     * Sets last name.
+     */
+    public void setLastName() {
     this.lastName = null;
   }
 
-  public Set<String> getSomeSet() {
+    /**
+     * Gets some set.
+     *
+     * @return the some set
+     */
+    public Set<String> getSomeSet() {
     return Collections.emptySet();
   }
 
-  /**
-   * We need to have this method that takes parameter and return types declared in the current class
-   */
-  public static Person buildPerson(Person seed) {
+    /**
+     * We need to have this method that takes parameter and return types declared in the current class
+     *
+     * @param seed the seed
+     * @return the person
+     */
+    public static Person buildPerson(Person seed) {
     return seed;
   }
 
-  /** Class that describes person's identification */
-  public static class IdentificationInfo {
+    /**
+     * Class that describes person's identification
+     */
+    public static class IdentificationInfo {
 
-    /** Enum describes person's gender */
-    public enum Gender {
-      MALE,
-      FEMALE
+        /**
+         * Enum describes person's gender
+         */
+        public enum Gender {
+            /**
+             * Male gender.
+             */
+            MALE,
+            /**
+             * Female gender.
+             */
+            FEMALE
     }
   }
 }

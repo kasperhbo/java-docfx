@@ -26,9 +26,18 @@ import javax.lang.model.element.VariableElement;
 import javax.lang.model.type.TypeKind;
 import jdk.javadoc.doclet.DocletEnvironment;
 
+/**
+ * The type Class items lookup.
+ */
 public class ClassItemsLookup extends BaseLookup<Element> {
   private Utils utils;
 
+  /**
+   * Instantiates a new Class items lookup.
+   *
+   * @param environment the environment
+   * @param elementUtil the element util
+   */
   public ClassItemsLookup(DocletEnvironment environment, ElementUtil elementUtil) {
     super(environment);
     utils = new Utils(environment, elementUtil);
@@ -105,6 +114,12 @@ public class ClassItemsLookup extends BaseLookup<Element> {
     return result;
   }
 
+  /**
+   * Extract parameters list.
+   *
+   * @param element the element
+   * @return the list
+   */
   List<MethodParameter> extractParameters(ExecutableElement element) {
     return element.getParameters().stream()
         .map(
@@ -117,6 +132,13 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Extract parameter description string.
+   *
+   * @param method    the method
+   * @param paramName the param name
+   * @return the string
+   */
   String extractParameterDescription(ExecutableElement method, String paramName) {
     return getDocCommentTree(method)
         .map(
@@ -131,6 +153,12 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         .orElse(null);
   }
 
+  /**
+   * Extract exceptions list.
+   *
+   * @param methodElement the method element
+   * @return the list
+   */
   List<ExceptionItem> extractExceptions(ExecutableElement methodElement) {
     return methodElement.getThrownTypes().stream()
         .map(
@@ -141,6 +169,12 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         .collect(Collectors.toList());
   }
 
+  /**
+   * Extract exception description string.
+   *
+   * @param methodElement the method element
+   * @return the string
+   */
   String extractExceptionDescription(ExecutableElement methodElement) {
     return getDocCommentTree(methodElement)
         .map(
@@ -154,6 +188,12 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         .orElse(null);
   }
 
+  /**
+   * Extract return return.
+   *
+   * @param methodElement the method element
+   * @return the return
+   */
   Return extractReturn(ExecutableElement methodElement) {
     if (methodElement.getReturnType().getKind() == TypeKind.VOID) {
       return null;
@@ -162,6 +202,12 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         String.valueOf(methodElement.getReturnType()), extractReturnDescription(methodElement));
   }
 
+  /**
+   * Extract return description string.
+   *
+   * @param methodElement the method element
+   * @return the string
+   */
   String extractReturnDescription(ExecutableElement methodElement) {
     return getDocCommentTree(methodElement)
         .map(
@@ -175,14 +221,32 @@ public class ClassItemsLookup extends BaseLookup<Element> {
         .orElse(null);
   }
 
+  /**
+   * Extract return return.
+   *
+   * @param fieldElement the field element
+   * @return the return
+   */
   Return extractReturn(VariableElement fieldElement) {
     return new Return(String.valueOf(fieldElement.asType()));
   }
 
+  /**
+   * Convert full name to overload string.
+   *
+   * @param fullName the full name
+   * @return the string
+   */
   String convertFullNameToOverload(String fullName) {
     return fullName.replaceAll("\\(.*\\)", "*");
   }
 
+  /**
+   * Extract overridden uid string.
+   *
+   * @param ovr the ovr
+   * @return the string
+   */
   String extractOverriddenUid(ExecutableElement ovr) {
     if (ovr != null) {
       TypeElement te = utils.getEnclosingTypeElement(ovr);

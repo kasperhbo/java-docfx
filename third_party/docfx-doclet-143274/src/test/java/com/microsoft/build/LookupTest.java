@@ -9,6 +9,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Lookup test.
+ */
 public class LookupTest {
 
   private Lookup lookup;
@@ -35,12 +38,18 @@ public class LookupTest {
         }
       };
 
-  @Before
+    /**
+     * Sets up.
+     */
+    @Before
   public void setUp() {
     lookup = new Lookup(packageFiles, classFiles);
   }
 
-  @Test
+    /**
+     * Build context.
+     */
+    @Test
   public void buildContext() {
     LookupContext context = lookup.buildContext(classFiles.get(0));
 

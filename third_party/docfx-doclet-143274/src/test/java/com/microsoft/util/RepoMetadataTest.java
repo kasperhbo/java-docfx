@@ -5,8 +5,14 @@ import static junit.framework.TestCase.assertEquals;
 import com.google.docfx.doclet.RepoMetadata;
 import org.junit.Test;
 
+/**
+ * The type Repo metadata test.
+ */
 public class RepoMetadataTest {
-  @Test
+    /**
+     * Test parse repo metadata.
+     */
+    @Test
   public void testParseRepoMetadata() {
     RepoMetadata testRepoMetadata = new RepoMetadata();
     String testRepoMetadataFilePath = "./src/test/java/com/microsoft/util/.repo-metadata.json";

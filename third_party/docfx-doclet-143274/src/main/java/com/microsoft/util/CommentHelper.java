@@ -7,40 +7,72 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.lang.model.element.Element;
 
+/**
+ * The type Comment helper.
+ */
 public class CommentHelper {
-  public Element element;
-  public List<? extends DocTree> inlineTags = Collections.emptyList();
+    /**
+     * The Element.
+     */
+    public Element element;
+    /**
+     * The Inline tags.
+     */
+    public List<? extends DocTree> inlineTags = Collections.emptyList();
   private Utils utils;
   private boolean hasInheritDocTag = false;
 
-  public CommentHelper(Element element, Utils utils) {
+    /**
+     * Instantiates a new Comment helper.
+     *
+     * @param element the element
+     * @param utils   the utils
+     */
+    public CommentHelper(Element element, Utils utils) {
     this.element = element;
     this.utils = utils;
     this.inlineTags = utils.getFullBody(element);
     this.hasInheritDocTag = utils.hasInlineTag(inlineTags, DocTree.Kind.INHERIT_DOC);
   }
 
-  public CommentHelper(Element element, Utils utils, List<? extends DocTree> inlineTags) {
+    /**
+     * Instantiates a new Comment helper.
+     *
+     * @param element    the element
+     * @param utils      the utils
+     * @param inlineTags the inline tags
+     */
+    public CommentHelper(Element element, Utils utils, List<? extends DocTree> inlineTags) {
     this.element = element;
     this.utils = utils;
     this.inlineTags = inlineTags;
     this.hasInheritDocTag = utils.hasInlineTag(inlineTags, DocTree.Kind.INHERIT_DOC);
   }
 
-  /**
-   * Returns true if the method has no comments, or a lone &commat;inheritDoc.
-   *
-   * @return true if there are no comments, false otherwise
-   */
-  public boolean isSimpleOverride() {
+    /**
+     * Returns true if the method has no comments, or a lone &commat;inheritDoc.
+     *
+     * @return true if there are no comments, false otherwise
+     */
+    public boolean isSimpleOverride() {
     return inlineTags.isEmpty() || (inlineTags.size() == 1 && hasInheritDocTag);
   }
 
-  public boolean hasInheritDocTag() {
+    /**
+     * Has inherit doc tag boolean.
+     *
+     * @return the boolean
+     */
+    public boolean hasInheritDocTag() {
     return this.hasInheritDocTag;
   }
 
-  public CommentHelper copy() {
+    /**
+     * Copy comment helper.
+     *
+     * @return the comment helper
+     */
+    public CommentHelper copy() {
     if (this.element == null) {
       throw new NullPointerException();
     }
@@ -48,7 +80,13 @@ public class CommentHelper {
     return clone;
   }
 
-  public CommentHelper inherit(CommentHelper chInheritFrom) {
+    /**
+     * Inherit comment helper.
+     *
+     * @param chInheritFrom the ch inherit from
+     * @return the comment helper
+     */
+    public CommentHelper inherit(CommentHelper chInheritFrom) {
     List<? extends DocTree> mergedTags = new ArrayList<>();
 
     if (this.isSimpleOverride()) mergedTags = chInheritFrom.inlineTags;
@@ -59,7 +97,14 @@ public class CommentHelper {
     return new CommentHelper(this.element, this.utils, mergedTags);
   }
 
-  List<? extends DocTree> inheritInlineTags(CommentHelper origin, CommentHelper chInheritFrom) {
+    /**
+     * Inherit inline tags list.
+     *
+     * @param origin        the origin
+     * @param chInheritFrom the ch inherit from
+     * @return the list
+     */
+    List<? extends DocTree> inheritInlineTags(CommentHelper origin, CommentHelper chInheritFrom) {
     List<DocTree> mergedTags = new ArrayList<>();
     if (!origin.isSimpleOverride() && !origin.hasInheritDocTag) {
       return origin.inlineTags;

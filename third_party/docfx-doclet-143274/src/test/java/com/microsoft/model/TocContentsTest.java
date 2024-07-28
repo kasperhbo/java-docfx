@@ -23,6 +23,9 @@ import java.util.List;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Toc contents test.
+ */
 public class TocContentsTest {
 
   private TocItem tocItemA;
@@ -34,7 +37,10 @@ public class TocContentsTest {
 
   private boolean disableLibraryOverview = false;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     tocItemA = new TocItem("A.uid.package.class", "nameA");
     tocItemB = new TocItem("B.uid.package.class", "nameB");
@@ -46,7 +52,10 @@ public class TocContentsTest {
     tocItems.add(tocItemC);
   }
 
-  @Test
+    /**
+     * Gets contents with project name.
+     */
+    @Test
   public void getContentsWithProjectName() {
     //  should include ProjectContents and Guides
     List<Object> tocContents =
@@ -76,7 +85,10 @@ public class TocContentsTest {
     assertEquals("Item C should be fifth", items.get(4), tocItemC);
   }
 
-  @Test
+    /**
+     * Gets contents no project name.
+     */
+    @Test
   public void getContentsNoProjectName() {
     List<Object> tocContents =
         new TocContents("", disableChangelog, disableLibraryOverview, tocItems).getContents();
@@ -88,7 +100,10 @@ public class TocContentsTest {
     assertEquals("Item C should be third", tocContents.get(2), tocItemC);
   }
 
-  @Test
+    /**
+     * Gets contents with disabled changelog.
+     */
+    @Test
   public void getContentsWithDisabledChangelog() {
     disableChangelog = true;
     List<Object> tocContents =
@@ -106,7 +121,10 @@ public class TocContentsTest {
     assertEquals("Item C should be fourth", items.get(3), tocItemC);
   }
 
-  @Test
+    /**
+     * Gets contents with disabled library overview.
+     */
+    @Test
   public void getContentsWithDisabledLibraryOverview() {
     disableLibraryOverview = true;
     List<Object> tocContents =

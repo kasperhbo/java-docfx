@@ -1,9 +1,13 @@
 package com.microsoft.samples.offers;
 
-/** Represents a form of product availability to customer */
+/**
+ * Represents a form of product availability to customer
+ */
 public class Offer {
-  /** Initializes a new instance of the Offer class. */
-  public Offer() {}
+    /**
+     * Initializes a new instance of the Offer class.
+     */
+    public Offer() {}
 
   /**
    * Gets or sets qualifications required by the Partner in order to purchase the offer for a
@@ -11,11 +15,21 @@ public class Offer {
    */
   private String[] __ResellerQualifications;
 
-  public String[] getResellerQualifications() {
+    /**
+     * Get reseller qualifications string [ ].
+     *
+     * @return the string [ ]
+     */
+    public String[] getResellerQualifications() {
     return __ResellerQualifications;
   }
 
-  public void setResellerQualifications(String[] value) {
+    /**
+     * Sets reseller qualifications.
+     *
+     * @param value the value
+     */
+    public void setResellerQualifications(String[] value) {
     __ResellerQualifications = value;
   }
 
@@ -25,11 +39,21 @@ public class Offer {
    */
   private String[] __ReselleeQualifications;
 
-  public String[] getReselleeQualifications() {
+    /**
+     * Get resellee qualifications string [ ].
+     *
+     * @return the string [ ]
+     */
+    public String[] getReselleeQualifications() {
     return __ReselleeQualifications;
   }
 
-  public void setReselleeQualifications(String[] value) {
+    /**
+     * Sets resellee qualifications.
+     *
+     * @param value the value
+     */
+    public void setReselleeQualifications(String[] value) {
     __ReselleeQualifications = value;
   }
 }

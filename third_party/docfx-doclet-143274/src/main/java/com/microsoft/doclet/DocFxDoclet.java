@@ -10,6 +10,9 @@ import javax.lang.model.SourceVersion;
 import javax.tools.Diagnostic.Kind;
 import java.util.*;
 
+/**
+ * The type Doc fx doclet.
+ */
 public class DocFxDoclet implements Doclet {
 
     private Reporter reporter;
@@ -205,12 +208,22 @@ public class DocFxDoclet implements Doclet {
         return SourceVersion.latest();
     }
 
+    /**
+     * The type Custom option.
+     */
     abstract static class CustomOption implements Option {
 
         private final String       description;
         private final List<String> names;
         private final String       parameters;
 
+        /**
+         * Instantiates a new Custom option.
+         *
+         * @param description the description
+         * @param names       the names
+         * @param parameters  the parameters
+         */
         protected CustomOption(String description, List<String> names, String parameters) {
             this.description = description;
             this.names       = names;
@@ -243,8 +256,17 @@ public class DocFxDoclet implements Doclet {
         }
     }
 
+    /**
+     * The type Fake option for compatibility with standard doclet.
+     */
     static class FakeOptionForCompatibilityWithStandardDoclet extends CustomOption {
 
+        /**
+         * Instantiates a new Fake option for compatibility with standard doclet.
+         *
+         * @param description the description
+         * @param name        the name
+         */
         public FakeOptionForCompatibilityWithStandardDoclet(String description, String name) {
             super(description, Collections.singletonList(name), "none");
         }

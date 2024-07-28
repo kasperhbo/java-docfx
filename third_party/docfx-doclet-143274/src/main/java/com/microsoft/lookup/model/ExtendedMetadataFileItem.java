@@ -8,7 +8,9 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
-/** Just container to keep cached precalculated values for lookup */
+/**
+ * Just container to keep cached precalculated values for lookup
+ */
 public class ExtendedMetadataFileItem extends MetadataFileItem {
 
   private String methodContent;
@@ -23,43 +25,93 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
   private Set<MetadataFileItem> references = new LinkedHashSet<>();
   private Integer nestedLevel;
 
-  public ExtendedMetadataFileItem(String uid) {
+    /**
+     * Instantiates a new Extended metadata file item.
+     *
+     * @param uid the uid
+     */
+    public ExtendedMetadataFileItem(String uid) {
     super(uid);
   }
 
-  public String getMethodContent() {
+    /**
+     * Gets method content.
+     *
+     * @return the method content
+     */
+    public String getMethodContent() {
     return methodContent;
   }
 
-  public void setMethodContent(String methodContent) {
+    /**
+     * Sets method content.
+     *
+     * @param methodContent the method content
+     */
+    public void setMethodContent(String methodContent) {
     this.methodContent = methodContent;
   }
 
-  public String getFieldContent() {
+    /**
+     * Gets field content.
+     *
+     * @return the field content
+     */
+    public String getFieldContent() {
     return fieldContent;
   }
 
-  public void setFieldContent(String fieldContent) {
+    /**
+     * Sets field content.
+     *
+     * @param fieldContent the field content
+     */
+    public void setFieldContent(String fieldContent) {
     this.fieldContent = fieldContent;
   }
 
-  public String getConstructorContent() {
+    /**
+     * Gets constructor content.
+     *
+     * @return the constructor content
+     */
+    public String getConstructorContent() {
     return constructorContent;
   }
 
-  public void setConstructorContent(String constructorContent) {
+    /**
+     * Sets constructor content.
+     *
+     * @param constructorContent the constructor content
+     */
+    public void setConstructorContent(String constructorContent) {
     this.constructorContent = constructorContent;
   }
 
-  public List<MethodParameter> getParameters() {
+    /**
+     * Gets parameters.
+     *
+     * @return the parameters
+     */
+    public List<MethodParameter> getParameters() {
     return parameters;
   }
 
-  public Integer getNestedLevel() {
+    /**
+     * Gets nested level.
+     *
+     * @return the nested level
+     */
+    public Integer getNestedLevel() {
     return nestedLevel;
   }
 
-  public void setNestedLevel(Integer level) {
+    /**
+     * Sets nested level.
+     *
+     * @param level the level
+     */
+    public void setNestedLevel(Integer level) {
     this.nestedLevel = level;
   }
 
@@ -68,7 +120,12 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     this.parameters = parameters;
   }
 
-  public Return getReturn() {
+    /**
+     * Gets return.
+     *
+     * @return the return
+     */
+    public Return getReturn() {
     return returnValue;
   }
 
@@ -77,7 +134,12 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     this.returnValue = returnValue;
   }
 
-  public String getContent() {
+    /**
+     * Gets content.
+     *
+     * @return the content
+     */
+    public String getContent() {
     return content;
   }
 
@@ -86,7 +148,12 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     this.content = content;
   }
 
-  public List<TypeParameter> getTypeParameters() {
+    /**
+     * Gets type parameters.
+     *
+     * @return the type parameters
+     */
+    public List<TypeParameter> getTypeParameters() {
     return typeParameters;
   }
 
@@ -95,27 +162,57 @@ public class ExtendedMetadataFileItem extends MetadataFileItem {
     this.typeParameters = typeParameters;
   }
 
-  public List<String> getSuperclass() {
+    /**
+     * Gets superclass.
+     *
+     * @return the superclass
+     */
+    public List<String> getSuperclass() {
     return superclass;
   }
 
-  public void setSuperclass(List<String> superclass) {
+    /**
+     * Sets superclass.
+     *
+     * @param superclass the superclass
+     */
+    public void setSuperclass(List<String> superclass) {
     this.superclass = superclass;
   }
 
-  public void setTocName(String tocName) {
+    /**
+     * Sets toc name.
+     *
+     * @param tocName the toc name
+     */
+    public void setTocName(String tocName) {
     this.tocName = tocName;
   }
 
-  public String getTocName() {
+    /**
+     * Gets toc name.
+     *
+     * @return the toc name
+     */
+    public String getTocName() {
     return tocName;
   }
 
-  public void addReferences(Set<MetadataFileItem> references) {
+    /**
+     * Add references.
+     *
+     * @param references the references
+     */
+    public void addReferences(Set<MetadataFileItem> references) {
     this.references.addAll(references);
   }
 
-  public Set<MetadataFileItem> getReferences() {
+    /**
+     * Gets references.
+     *
+     * @return the references
+     */
+    public Set<MetadataFileItem> getReferences() {
     return references;
   }
 }

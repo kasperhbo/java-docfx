@@ -8,6 +8,9 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Lookup context test.
+ */
 public class LookupContextTest {
 
   private LookupContext lookupContext;
@@ -19,7 +22,10 @@ public class LookupContextTest {
   private String globalValue = "global value";
   private String unknownKey = "unknown key";
 
-  @Before
+    /**
+     * Sets up.
+     */
+    @Before
   public void setUp() {
     localLookup.put(localKeys[0], localValues[0]);
     localLookup.put(localKeys[1], localValues[1]);
@@ -28,7 +34,10 @@ public class LookupContextTest {
     lookupContext = new LookupContext(globalLookup, localLookup);
   }
 
-  @Test
+    /**
+     * Resolve.
+     */
+    @Test
   public void resolve() {
     assertEquals("Wrong value for global key", lookupContext.resolve(globalKey), globalValue);
     assertEquals(
@@ -38,12 +47,18 @@ public class LookupContextTest {
     assertNull("Wrong value for unknown key", lookupContext.resolve(unknownKey));
   }
 
-  @Test
+    /**
+     * Gets owner uid.
+     */
+    @Test
   public void getOwnerUid() {
     assertEquals("Wrong ownerUid", lookupContext.getOwnerUid(), localKeys[0]);
   }
 
-  @Test
+    /**
+     * Contains key.
+     */
+    @Test
   public void containsKey() {
     assertTrue("Wrong value for global key", lookupContext.containsKey(globalKey));
     assertTrue("Wrong value for local key 1", lookupContext.containsKey(localKeys[0]));

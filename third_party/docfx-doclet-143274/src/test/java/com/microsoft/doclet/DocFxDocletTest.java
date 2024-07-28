@@ -11,26 +11,41 @@ import jdk.javadoc.doclet.Doclet.Option.Kind;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Doc fx doclet test.
+ */
 public class DocFxDocletTest {
 
   private DocFxDoclet doclet;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     doclet = new DocFxDoclet();
   }
 
-  @Test
+    /**
+     * Gets supported source version.
+     */
+    @Test
   public void getSupportedSourceVersion() {
     assertEquals("Wrong version used", doclet.getSupportedSourceVersion(), SourceVersion.latest());
   }
 
-  @Test
+    /**
+     * Gets doclet name.
+     */
+    @Test
   public void getDocletName() {
     assertEquals("Wrong doclet name", doclet.getName(), "DocFxDoclet");
   }
 
-  @Test
+    /**
+     * Test custom option creation.
+     */
+    @Test
   public void testCustomOptionCreation() {
     String description = "Some desc";
     List<String> names = Arrays.asList("name 1", "name 2");
@@ -51,7 +66,10 @@ public class DocFxDocletTest {
     assertEquals("Wrong params", option.getParameters(), params);
   }
 
-  @Test
+    /**
+     * Test fake option creation.
+     */
+    @Test
   public void testFakeOptionCreation() {
     FakeOptionForCompatibilityWithStandardDoclet option =
         new FakeOptionForCompatibilityWithStandardDoclet("Some description", "title");

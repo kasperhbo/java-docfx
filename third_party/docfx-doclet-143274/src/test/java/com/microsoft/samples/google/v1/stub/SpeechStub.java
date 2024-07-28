@@ -33,6 +33,7 @@ import com.google.longrunning.stub.OperationsStub;
 import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS.
+
 /**
  * Base stub class for the Speech service API.
  *
@@ -42,30 +43,60 @@ import javax.annotation.Generated;
 @Generated("by gapic-generator-java")
 public abstract class SpeechStub implements BackgroundResource {
 
-  public OperationsStub getOperationsStub() {
+    /**
+     * Gets operations stub.
+     *
+     * @return the operations stub
+     */
+    public OperationsStub getOperationsStub() {
     return null;
   }
 
-  public com.google.api.gax.httpjson.longrunning.stub.OperationsStub getHttpJsonOperationsStub() {
+    /**
+     * Gets http json operations stub.
+     *
+     * @return the http json operations stub
+     */
+    public com.google.api.gax.httpjson.longrunning.stub.OperationsStub getHttpJsonOperationsStub() {
     return null;
   }
 
-  public UnaryCallable<RecognizeRequest, RecognizeResponse> recognizeCallable() {
+    /**
+     * Recognize callable unary callable.
+     *
+     * @return the unary callable
+     */
+    public UnaryCallable<RecognizeRequest, RecognizeResponse> recognizeCallable() {
     throw new UnsupportedOperationException("Not implemented: recognizeCallable()");
   }
 
-  public OperationCallable<
+    /**
+     * Long running recognize operation callable operation callable < long running recognize request , long running recognize response , long running recognize metadata >.
+     *
+     * @return the operation callable < long running recognize request , long running recognize response , long running recognize metadata >
+     */
+    public OperationCallable<
           LongRunningRecognizeRequest, LongRunningRecognizeResponse, LongRunningRecognizeMetadata>
       longRunningRecognizeOperationCallable() {
     throw new UnsupportedOperationException(
         "Not implemented: longRunningRecognizeOperationCallable()");
   }
 
-  public UnaryCallable<LongRunningRecognizeRequest, Operation> longRunningRecognizeCallable() {
+    /**
+     * Long running recognize callable unary callable.
+     *
+     * @return the unary callable
+     */
+    public UnaryCallable<LongRunningRecognizeRequest, Operation> longRunningRecognizeCallable() {
     throw new UnsupportedOperationException("Not implemented: longRunningRecognizeCallable()");
   }
 
-  public BidiStreamingCallable<StreamingRecognizeRequest, StreamingRecognizeResponse>
+    /**
+     * Streaming recognize callable bidi streaming callable.
+     *
+     * @return the bidi streaming callable
+     */
+    public BidiStreamingCallable<StreamingRecognizeRequest, StreamingRecognizeResponse>
       streamingRecognizeCallable() {
     throw new UnsupportedOperationException("Not implemented: streamingRecognizeCallable()");
   }

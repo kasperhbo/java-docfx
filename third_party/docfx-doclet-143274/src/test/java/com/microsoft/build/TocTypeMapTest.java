@@ -10,10 +10,16 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Toc type map test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TocTypeMapTest {
 
-  @Test
+    /**
+     * Test to list.
+     */
+    @Test
   public void testToList() {
     TocTypeMap typeMap = new TocTypeMap();
     TocItem classToc = new TocItem("uid1", "name1");

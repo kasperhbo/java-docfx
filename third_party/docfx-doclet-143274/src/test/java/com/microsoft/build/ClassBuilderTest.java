@@ -36,14 +36,23 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+/**
+ * The type Class builder test.
+ */
 public class ClassBuilderTest {
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private ClassBuilder classBuilder;
   private DocletEnvironment environment;
   private DocTrees docTrees;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     environment = Mockito.mock(DocletEnvironment.class);
@@ -61,7 +70,10 @@ public class ClassBuilderTest {
             new ReferenceBuilder(environment, classLookup, elementUtil));
   }
 
-  @Test
+    /**
+     * Add constructors info when only default constructor.
+     */
+    @Test
   public void addConstructorsInfoWhenOnlyDefaultConstructor() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
     MetadataFile container = new MetadataFile("output", "name");
@@ -75,7 +87,10 @@ public class ClassBuilderTest {
     assertEquals("Container should contain constructor item", container.getItems().size(), 1);
   }
 
-  @Test
+    /**
+     * Add constructors info.
+     */
+    @Test
   public void addConstructorsInfo() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     MetadataFile container = new MetadataFile("output", "name");

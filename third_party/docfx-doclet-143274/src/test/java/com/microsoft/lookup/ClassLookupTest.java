@@ -28,10 +28,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Class lookup test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class ClassLookupTest {
 
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private ClassLookup classLookup;
   private DocletEnvironment environment;
@@ -43,7 +49,10 @@ public class ClassLookupTest {
   private TypeMirror typeMirror;
   private ClassItemsLookup classItemsLookup;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     environment = Mockito.mock(DocletEnvironment.class);
@@ -59,7 +68,10 @@ public class ClassLookupTest {
     when(environment.getDocTrees()).thenReturn(docTrees);
   }
 
-  @Test
+    /**
+     * Determine type parameters.
+     */
+    @Test
   public void determineTypeParameters() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 
@@ -69,7 +81,10 @@ public class ClassLookupTest {
     assertEquals("Wrong type parameter id", result.get(0).getId(), "T");
   }
 
-  @Test
+    /**
+     * Determine superclass.
+     */
+    @Test
   public void determineSuperclass() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 
@@ -78,7 +93,10 @@ public class ClassLookupTest {
     assertEquals("Wrong result", result, "java.lang.Object");
   }
 
-  @Test
+    /**
+     * Determine superclass for child class.
+     */
+    @Test
   public void determineSuperclassForChildClass() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
@@ -87,7 +105,10 @@ public class ClassLookupTest {
     assertEquals("Wrong result", result, "com.microsoft.samples.subpackage.Person");
   }
 
-  @Test
+    /**
+     * Determine superclass for enum.
+     */
+    @Test
   public void determineSuperclassForEnum() {
     TypeElement element =
         elements.getTypeElement(
@@ -101,7 +122,10 @@ public class ClassLookupTest {
         "java.lang.Enum<com.microsoft.samples.subpackage.Person.IdentificationInfo.Gender>");
   }
 
-  @Test
+    /**
+     * Determine class content.
+     */
+    @Test
   public void determineClassContent() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
@@ -119,7 +143,10 @@ public class ClassLookupTest {
         "Wrong set of interfaces", container.getInterfaces().contains("java.lang.Cloneable"));
   }
 
-  @Test
+    /**
+     * Determine class content for interface.
+     */
+    @Test
   public void determineClassContentForInterface() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
     ExtendedMetadataFileItem container = new ExtendedMetadataFileItem("UID");
@@ -140,7 +167,10 @@ public class ClassLookupTest {
             .contains("java.util.List<com.microsoft.samples.subpackage.Person<T>>"));
   }
 
-  @Test
+    /**
+     * Determine class content for enum.
+     */
+    @Test
   public void determineClassContentForEnum() {
     TypeElement element =
         elements.getTypeElement(
@@ -155,7 +185,10 @@ public class ClassLookupTest {
         "public enum Person.IdentificationInfo.Gender extends Enum<Person.IdentificationInfo.Gender>");
   }
 
-  @Test
+    /**
+     * Determine class content for static class.
+     */
+    @Test
   public void determineClassContentForStaticClass() {
     TypeElement element =
         elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
@@ -167,14 +200,20 @@ public class ClassLookupTest {
         "Wrong content", container.getContent(), "public static class Person.IdentificationInfo");
   }
 
-  @Test
+    /**
+     * Determine type for interface.
+     */
+    @Test
   public void determineTypeForInterface() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
 
     assertEquals(classLookup.determineType(element), "Interface");
   }
 
-  @Test
+    /**
+     * Determine type for enum.
+     */
+    @Test
   public void determineTypeForEnum() {
     TypeElement element =
         elements.getTypeElement(
@@ -183,7 +222,10 @@ public class ClassLookupTest {
     assertEquals(classLookup.determineType(element), "Enum");
   }
 
-  @Test
+    /**
+     * Determine type for class.
+     */
+    @Test
   public void determineTypeForClass() {
     TypeElement element =
         elements.getTypeElement("com.microsoft.samples.subpackage.Person.IdentificationInfo");
@@ -191,7 +233,10 @@ public class ClassLookupTest {
     assertEquals(classLookup.determineType(element), "Class");
   }
 
-  @Test
+    /**
+     * Extract status deprecated.
+     */
+    @Test
   public void extractStatus_deprecated() {
     TypeElement element =
         elements.getTypeElement(
@@ -202,7 +247,10 @@ public class ClassLookupTest {
     assertEquals("Wrong description", result, Status.DEPRECATED.toString());
   }
 
-  @Test
+    /**
+     * Extract status not deprecated.
+     */
+    @Test
   public void extractStatus_notDeprecated() {
     TypeElement element =
         elements.getTypeElement("com.microsoft.samples.agreements.AgreementMetaData");
@@ -212,7 +260,10 @@ public class ClassLookupTest {
     assertNull("Wrong description", result);
   }
 
-  @Test
+    /**
+     * Test extract java type.
+     */
+    @Test
   public void testExtractJavaType() {
     TypeElement typeElement =
         elements.getTypeElement("com.microsoft.samples.google.ValidationException");
@@ -228,7 +279,10 @@ public class ClassLookupTest {
     assertNull("Wrong javaType", classLookup.extractJavaType(typeElement));
   }
 
-  @Test
+    /**
+     * Test extract status class beta.
+     */
+    @Test
   public void testExtractStatus_class_beta() {
     TypeElement betaApi = elements.getTypeElement("com.microsoft.samples.google.BetaApi");
     assertThat(classLookup.extractStatus(betaApi)).isEqualTo("beta");

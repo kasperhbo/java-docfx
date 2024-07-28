@@ -7,9 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+/**
+ * The type Options file util.
+ */
 public class OptionsFileUtil {
 
-  public static List<String> processOptionsFile(String filename) {
+    /**
+     * Process options file list.
+     *
+     * @param filename the filename
+     * @return the list
+     */
+    public static List<String> processOptionsFile(String filename) {
     List<String> jargs = new ArrayList<>();
 
     String options = readOptionsFromFile(filename);

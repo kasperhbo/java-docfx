@@ -1,6 +1,8 @@
 package com.microsoft.samples.commentinheritance;
 
-/** Mammal. */
+/**
+ * Mammal.
+ */
 public abstract class Mammal extends Animal {
 
   /** {@inheritDoc} Get kind from Mammal. */

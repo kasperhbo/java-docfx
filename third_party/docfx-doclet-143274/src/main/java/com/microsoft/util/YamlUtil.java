@@ -7,6 +7,9 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.fasterxml.jackson.dataformat.yaml.YAMLGenerator.Feature;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * The type Yaml util.
+ */
 public class YamlUtil {
   private static final ObjectMapper mapper =
       new ObjectMapper(
@@ -16,7 +19,13 @@ public class YamlUtil {
           .setSerializationInclusion(Include.NON_NULL)
           .setSerializationInclusion(Include.NON_EMPTY);
 
-  public static String objectToYamlString(Object object) {
+    /**
+     * Object to yaml string string.
+     *
+     * @param object the object
+     * @return the string
+     */
+    public static String objectToYamlString(Object object) {
     try {
       return mapper.writeValueAsString(object);
     } catch (JsonProcessingException jpe) {
@@ -24,7 +33,13 @@ public class YamlUtil {
     }
   }
 
-  public static String cleanupHtml(String text) {
+    /**
+     * Cleanup html string.
+     *
+     * @param text the text
+     * @return the string
+     */
+    public static String cleanupHtml(String text) {
     if (StringUtils.isBlank(text)) {
       return text;
     }

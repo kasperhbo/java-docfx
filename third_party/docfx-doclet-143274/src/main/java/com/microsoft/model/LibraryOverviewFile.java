@@ -5,6 +5,9 @@ import com.google.docfx.doclet.RepoMetadata;
 import java.io.File;
 import java.util.Arrays;
 
+/**
+ * The type Library overview file.
+ */
 public class LibraryOverviewFile {
   // This is passed in as an environment variable
   private String repoMetadataFilePath;
@@ -36,7 +39,17 @@ public class LibraryOverviewFile {
 
   private String LIBRARY_OVERVIEW_PACKAGE_SELECTION_SECTION = "";
 
-  public LibraryOverviewFile(
+    /**
+     * Instantiates a new Library overview file.
+     *
+     * @param outputPath           the output path
+     * @param fileName             the file name
+     * @param artifactVersion      the artifact version
+     * @param librariesBomVersion  the libraries bom version
+     * @param repoMetadataFilePath the repo metadata file path
+     * @param recommendedPackage   the recommended package
+     */
+    public LibraryOverviewFile(
       String outputPath,
       String fileName,
       String artifactVersion,
@@ -236,7 +249,12 @@ public class LibraryOverviewFile {
     }
   }
 
-  @JsonIgnore
+    /**
+     * Gets file content.
+     *
+     * @return the file content
+     */
+    @JsonIgnore
   public String getFileContent() {
     return LIBRARY_OVERVIEW_FILE_HEADER
         + LIBRARY_OVERVIEW_KEY_REFERENCE_HEADER
@@ -257,17 +275,32 @@ public class LibraryOverviewFile {
     return string.substring(0, 1).toUpperCase() + string.substring(1);
   }
 
-  @JsonIgnore
+    /**
+     * Gets file name with path.
+     *
+     * @return the file name with path
+     */
+    @JsonIgnore
   public String getFileNameWithPath() {
     return outputPath + File.separator + fileName;
   }
 
-  @JsonIgnore
+    /**
+     * Gets file name.
+     *
+     * @return the file name
+     */
+    @JsonIgnore
   public String getFileName() {
     return fileName;
   }
 
-  public void setFileName(String fileName) {
+    /**
+     * Sets file name.
+     *
+     * @param fileName the file name
+     */
+    public void setFileName(String fileName) {
     this.fileName = fileName;
   }
 }

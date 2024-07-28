@@ -11,12 +11,12 @@ import com.microsoft.samples.IPartner;
 @Deprecated
 public class AgreementDetailsCollectionOperations extends BasePartnerComponentString
     implements IAgreementDetailsCollection {
-  /**
-   * Initializes a new instance of the AgreementDetailsCollectionOperations class.
-   *
-   * @param rootPartnerOperations The root partner operations instance.
-   */
-  public AgreementDetailsCollectionOperations(IPartner rootPartnerOperations) {
+    /**
+     * Initializes a new instance of the AgreementDetailsCollectionOperations class.
+     *
+     * @param rootPartnerOperations The root partner operations instance.
+     */
+    public AgreementDetailsCollectionOperations(IPartner rootPartnerOperations) {
     super(rootPartnerOperations);
   }
 

@@ -7,6 +7,9 @@ import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.TreeSet;
 
+/**
+ * The type Metadata file.
+ */
 public class MetadataFile implements YmlFile {
 
   private static final String METADATA_FILE_HEADER = "### YamlMime:ManagedReference\n";
@@ -15,16 +18,32 @@ public class MetadataFile implements YmlFile {
   private Set<MetadataFileItem> items = new LinkedHashSet<>();
   private Set<MetadataFileItem> references = new LinkedHashSet<>();
 
-  public MetadataFile(String outputPath, String fileName) {
+    /**
+     * Instantiates a new Metadata file.
+     *
+     * @param outputPath the output path
+     * @param fileName   the file name
+     */
+    public MetadataFile(String outputPath, String fileName) {
     this.outputPath = outputPath;
     this.fileName = fileName;
   }
 
-  public Set<MetadataFileItem> getItems() {
+    /**
+     * Gets items.
+     *
+     * @return the items
+     */
+    public Set<MetadataFileItem> getItems() {
     return items;
   }
 
-  public Set<MetadataFileItem> getReferences() {
+    /**
+     * Gets references.
+     *
+     * @return the references
+     */
+    public Set<MetadataFileItem> getReferences() {
     return references;
   }
 
@@ -42,12 +61,22 @@ public class MetadataFile implements YmlFile {
     return outputPath + File.separator + fileName;
   }
 
-  @JsonIgnore
+    /**
+     * Gets file name.
+     *
+     * @return the file name
+     */
+    @JsonIgnore
   public String getFileName() {
     return fileName;
   }
 
-  public void setFileName(String fileName) {
+    /**
+     * Sets file name.
+     *
+     * @param fileName the file name
+     */
+    public void setFileName(String fileName) {
     this.fileName = fileName;
   }
 }

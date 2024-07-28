@@ -26,6 +26,9 @@ import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
 
+/**
+ * The type Yml files builder.
+ */
 public class YmlFilesBuilder {
   private static final String OLDER_AND_PRERELEASE = "Older and prerelease packages";
 
@@ -48,6 +51,20 @@ public class YmlFilesBuilder {
   private final ClassBuilder classBuilder;
   private final ReferenceBuilder referenceBuilder;
 
+  /**
+   * Instantiates a new Yml files builder.
+   *
+   * @param environment            the environment
+   * @param outputPath             the output path
+   * @param excludePackages        the exclude packages
+   * @param excludeClasses         the exclude classes
+   * @param projectName            the project name
+   * @param disableChangelog       the disable changelog
+   * @param disableLibraryOverview the disable library overview
+   * @param artifactVersion        the artifact version
+   * @param librariesBomVersion    the libraries bom version
+   * @param repoMetadataFilePath   the repo metadata file path
+   */
   public YmlFilesBuilder(
       DocletEnvironment environment,
       String outputPath,
@@ -83,6 +100,11 @@ public class YmlFilesBuilder {
             referenceBuilder);
   }
 
+  /**
+   * Build boolean.
+   *
+   * @return the boolean
+   */
   public boolean build() {
     Processor processor = new Processor();
     processor.repoMetadata = processor.repoMetadata.parseRepoMetadata(this.repoMetadataFilePath);
@@ -112,13 +134,22 @@ public class YmlFilesBuilder {
     return true;
   }
 
+  /**
+   * The type Processor.
+   */
   @VisibleForTesting
   class Processor {
-    //  table of contents
+    /**
+     * The Toc file.
+     */
+//  table of contents
     final TocFile tocFile =
         new TocFile(outputPath, projectName, disableChangelog, disableLibraryOverview);
     //  overview page if not using new libraryOverview
 
+    /**
+     * The Project metadata file.
+     */
     final MetadataFile projectMetadataFile = new MetadataFile(outputPath, "overview.yml");
     //  package summary pages
     private final List<MetadataFile> packageMetadataFiles = new ArrayList<>();
@@ -139,6 +170,9 @@ public class YmlFilesBuilder {
 
     private RepoMetadata repoMetadata = new RepoMetadata();
 
+    /**
+     * Process.
+     */
     @VisibleForTesting
     void process() {
       ImmutableListMultimap<PackageGroup, PackageElement> organizedPackagesWithoutStubs =

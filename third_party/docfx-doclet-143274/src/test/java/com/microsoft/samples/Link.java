@@ -2,9 +2,15 @@ package com.microsoft.samples;
 
 import java.util.Collection;
 
+/**
+ * The type Link.
+ */
 public class Link {
 
-  public Link() {}
+    /**
+     * Instantiates a new Link.
+     */
+    public Link() {}
 
   /**
    * Initializes a new instance of the Link class.
@@ -19,22 +25,42 @@ public class Link {
    */
   private String method;
 
-  public String getMethod() {
+    /**
+     * Gets method.
+     *
+     * @return the method
+     */
+    public String getMethod() {
     return method;
   }
 
-  public void setMethod(String value) {
+    /**
+     * Sets method.
+     *
+     * @param value the value
+     */
+    public void setMethod(String value) {
     method = value;
   }
 
   /** Gets the link headers. */
   private Collection<KeyValuePair<String, String>> headers;
 
-  public Collection<KeyValuePair<String, String>> getHeaders() {
+    /**
+     * Gets headers.
+     *
+     * @return the headers
+     */
+    public Collection<KeyValuePair<String, String>> getHeaders() {
     return headers;
   }
 
-  public void setHeaders(Collection<KeyValuePair<String, String>> value) {
+    /**
+     * Sets headers.
+     *
+     * @param value the value
+     */
+    public void setHeaders(Collection<KeyValuePair<String, String>> value) {
     headers = value;
   }
 }

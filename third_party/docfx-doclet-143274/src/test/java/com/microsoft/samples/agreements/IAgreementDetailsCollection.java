@@ -7,10 +7,10 @@ package com.microsoft.samples.agreements;
  */
 @Deprecated
 public interface IAgreementDetailsCollection {
-  /**
-   * Retrieves all current agreement metadata.
-   *
-   * @return The current agreement metadata.
-   */
-  ResourceCollection<AgreementMetaData> get();
+    /**
+     * Retrieves all current agreement metadata.
+     *
+     * @return The current agreement metadata.
+     */
+    ResourceCollection<AgreementMetaData> get();
 }

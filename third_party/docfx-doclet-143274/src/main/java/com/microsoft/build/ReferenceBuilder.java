@@ -35,6 +35,9 @@ import java.util.stream.Stream;
 
 import static com.microsoft.build.BuilderUtil.*;
 
+/**
+ * The type Reference builder.
+ */
 class ReferenceBuilder {
     private static final Logger logger = org.slf4j.LoggerFactory.getLogger(ReferenceBuilder.class);
 
@@ -46,6 +49,13 @@ class ReferenceBuilder {
     private final        ClassLookup       classLookup;
     private final        ElementUtil       elementUtil;
 
+    /**
+     * Instantiates a new Reference builder.
+     *
+     * @param environment the environment
+     * @param classLookup the class lookup
+     * @param elementUtil the element util
+     */
     ReferenceBuilder(
             DocletEnvironment environment, ClassLookup classLookup, ElementUtil elementUtil) {
         this.environment = environment;
@@ -53,6 +63,12 @@ class ReferenceBuilder {
         this.elementUtil = elementUtil;
     }
 
+    /**
+     * Build class reference metadata file item.
+     *
+     * @param classElement the class element
+     * @return the metadata file item
+     */
     MetadataFileItem buildClassReference(TypeElement classElement) {
         MetadataFileItem referenceItem = new MetadataFileItem(classLookup.extractUid(classElement));
         referenceItem.setName(classLookup.extractName(classElement));
@@ -61,6 +77,12 @@ class ReferenceBuilder {
         return referenceItem;
     }
 
+    /**
+     * Add references info.
+     *
+     * @param classElement      the class element
+     * @param classMetadataFile the class metadata file
+     */
     void addReferencesInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         MetadataFileItem classReference = new MetadataFileItem(classLookup.extractUid(classElement));
         classReference.setParent(classLookup.extractParent(classElement));
@@ -72,6 +94,12 @@ class ReferenceBuilder {
         addInnerClassesReferences(classElement, classMetadataFile);
     }
 
+    /**
+     * Add package children summaries.
+     *
+     * @param element                  the element
+     * @param packageChildrenSummaries the package children summaries
+     */
     void addPackageChildrenSummaries(
             Element element, List<PackageChildSummary> packageChildrenSummaries) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
@@ -122,6 +150,12 @@ class ReferenceBuilder {
         }
     }
 
+    /**
+     * Gets java reference href.
+     *
+     * @param uid the uid
+     * @return the java reference href
+     */
     String getJavaReferenceHref(String uid) {
         if (uid == null || uid.equals("")) {
             return JAVA_BASE_URL;
@@ -156,6 +190,11 @@ class ReferenceBuilder {
         return JAVA_BASE_URL + endURL;
     }
 
+    /**
+     * Update external references.
+     *
+     * @param classMetadataFiles the class metadata files
+     */
     void updateExternalReferences(List<MetadataFile> classMetadataFiles) {
         classMetadataFiles.forEach(
                 file -> file.getReferences().forEach(ref -> updateExternalReference(ref)));
@@ -225,6 +264,12 @@ class ReferenceBuilder {
         return JAVA_PATTERN.matcher(uid).find();
     }
 
+    /**
+     * Add parameter references.
+     *
+     * @param methodItem        the method item
+     * @param classMetadataFile the class metadata file
+     */
     void addParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile
                 .getReferences()
@@ -235,6 +280,12 @@ class ReferenceBuilder {
                                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Add return references.
+     *
+     * @param methodItem        the method item
+     * @param classMetadataFile the class metadata file
+     */
     void addReturnReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile
                 .getReferences()
@@ -246,6 +297,12 @@ class ReferenceBuilder {
                                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Add exception references.
+     *
+     * @param methodItem        the method item
+     * @param classMetadataFile the class metadata file
+     */
     void addExceptionReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile
                 .getReferences()
@@ -256,6 +313,12 @@ class ReferenceBuilder {
                                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Add type parameter references.
+     *
+     * @param methodItem        the method item
+     * @param classMetadataFile the class metadata file
+     */
     void addTypeParameterReferences(MetadataFileItem methodItem, MetadataFile classMetadataFile) {
         classMetadataFile
                 .getReferences()
@@ -269,11 +332,23 @@ class ReferenceBuilder {
                                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Add superclass and interfaces references.
+     *
+     * @param classElement      the class element
+     * @param classMetadataFile the class metadata file
+     */
     void addSuperclassAndInterfacesReferences(
             TypeElement classElement, MetadataFile classMetadataFile) {
         classMetadataFile.getReferences().addAll(classLookup.extractReferences(classElement));
     }
 
+    /**
+     * Add inner classes references.
+     *
+     * @param classElement      the class element
+     * @param classMetadataFile the class metadata file
+     */
     void addInnerClassesReferences(TypeElement classElement, MetadataFile classMetadataFile) {
         classMetadataFile
                 .getReferences()
@@ -283,6 +358,12 @@ class ReferenceBuilder {
                                 .collect(Collectors.toList()));
     }
 
+    /**
+     * Add overload references.
+     *
+     * @param item              the item
+     * @param classMetadataFile the class metadata file
+     */
     void addOverloadReferences(MetadataFileItem item, MetadataFile classMetadataFile) {
         classMetadataFile
                 .getReferences()
@@ -307,6 +388,8 @@ class ReferenceBuilder {
      *     - df.mn.ClassOne
      *     - tr.T
      * </pre>
+     *
+     * @param classMetadataFile the class metadata file
      */
     void expandComplexGenericsInReferences(MetadataFile classMetadataFile) {
         Set<MetadataFileItem> additionalItems = new LinkedHashSet<>();
@@ -326,6 +409,12 @@ class ReferenceBuilder {
         classMetadataFile.getReferences().addAll(additionalItems);
     }
 
+    /**
+     * Build ref item metadata file item.
+     *
+     * @param uid the uid
+     * @return the metadata file item
+     */
     MetadataFileItem buildRefItem(String uid) {
         if (!uid.endsWith("*") && (uid.contains("<") || uid.contains("[]"))) {
             return new MetadataFileItem(uid, getJavaSpec(replaceUidAndSplit(uid)));

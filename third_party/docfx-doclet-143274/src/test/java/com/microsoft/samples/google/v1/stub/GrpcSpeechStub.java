@@ -42,6 +42,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS.
+
 /**
  * gRPC stub implementation for the Speech service API.
  *
@@ -92,34 +93,65 @@ public class GrpcSpeechStub extends SpeechStub {
   private final GrpcOperationsStub operationsStub;
   private final GrpcStubCallableFactory callableFactory;
 
-  public static final GrpcSpeechStub create(SpeechStubSettings settings) throws IOException {
+    /**
+     * Create grpc speech stub.
+     *
+     * @param settings the settings
+     * @return the grpc speech stub
+     * @throws IOException the io exception
+     */
+    public static final GrpcSpeechStub create(SpeechStubSettings settings) throws IOException {
     return new GrpcSpeechStub(settings, ClientContext.create(settings));
   }
 
-  public static final GrpcSpeechStub create(ClientContext clientContext) throws IOException {
+    /**
+     * Create grpc speech stub.
+     *
+     * @param clientContext the client context
+     * @return the grpc speech stub
+     * @throws IOException the io exception
+     */
+    public static final GrpcSpeechStub create(ClientContext clientContext) throws IOException {
     return new GrpcSpeechStub(SpeechStubSettings.newBuilder().build(), clientContext);
   }
 
-  public static final GrpcSpeechStub create(
+    /**
+     * Create grpc speech stub.
+     *
+     * @param clientContext   the client context
+     * @param callableFactory the callable factory
+     * @return the grpc speech stub
+     * @throws IOException the io exception
+     */
+    public static final GrpcSpeechStub create(
       ClientContext clientContext, GrpcStubCallableFactory callableFactory) throws IOException {
     return new GrpcSpeechStub(
         SpeechStubSettings.newBuilder().build(), clientContext, callableFactory);
   }
 
-  /**
-   * Constructs an instance of GrpcSpeechStub, using the given settings. This is protected so that
-   * it is easy to make a subclass, but otherwise, the static factory methods should be preferred.
-   */
-  protected GrpcSpeechStub(SpeechStubSettings settings, ClientContext clientContext)
+    /**
+     * Constructs an instance of GrpcSpeechStub, using the given settings. This is protected so that
+     * it is easy to make a subclass, but otherwise, the static factory methods should be preferred.
+     *
+     * @param settings      the settings
+     * @param clientContext the client context
+     * @throws IOException the io exception
+     */
+    protected GrpcSpeechStub(SpeechStubSettings settings, ClientContext clientContext)
       throws IOException {
     this(settings, clientContext, new GrpcSpeechCallableFactory());
   }
 
-  /**
-   * Constructs an instance of GrpcSpeechStub, using the given settings. This is protected so that
-   * it is easy to make a subclass, but otherwise, the static factory methods should be preferred.
-   */
-  protected GrpcSpeechStub(
+    /**
+     * Constructs an instance of GrpcSpeechStub, using the given settings. This is protected so that
+     * it is easy to make a subclass, but otherwise, the static factory methods should be preferred.
+     *
+     * @param settings        the settings
+     * @param clientContext   the client context
+     * @param callableFactory the callable factory
+     * @throws IOException the io exception
+     */
+    protected GrpcSpeechStub(
       SpeechStubSettings settings,
       ClientContext clientContext,
       GrpcStubCallableFactory callableFactory)

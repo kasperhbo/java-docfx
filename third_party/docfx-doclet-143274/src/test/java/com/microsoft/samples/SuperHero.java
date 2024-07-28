@@ -17,34 +17,51 @@ public class SuperHero extends Person implements Serializable, Cloneable {
   private String uniquePower;
   private int health;
   private int defense;
-  String hobby;
+    /**
+     * The Hobby.
+     */
+    String hobby;
 
-  public final String SOME_PUBLIC_STRING = "So important string value";
+    /**
+     * The Some public string.
+     */
+    public final String SOME_PUBLIC_STRING = "So important string value";
 
-  public SuperHero() {}
+    /**
+     * Instantiates a new Super hero.
+     */
+    public SuperHero() {}
 
-  public SuperHero(String heroName, String uniquePower, int health, int defense) {
+    /**
+     * Instantiates a new Super hero.
+     *
+     * @param heroName    the hero name
+     * @param uniquePower the unique power
+     * @param health      the health
+     * @param defense     the defense
+     */
+    public SuperHero(String heroName, String uniquePower, int health, int defense) {
     this.heroName = heroName;
     this.uniquePower = uniquePower;
     this.health = health;
     this.defense = defense;
   }
 
-  /**
-   * This is a simple description of the method. . . <a
-   * href="http://www.supermanisthegreatest.com">Superman!</a>
-   *
-   * @param incomingDamage the amount of incoming damage for {@link SuperHero}
-   * @param damageType type of damage with similar word damageTypeLong, sure
-   * @return the amount of health hero has after attack
-   * @throws IllegalArgumentException when incomingDamage is negative and thanks for {@link
-   *     Exception}
-   * @version 1.2
-   * @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a>
-   * @since 1.0
-   * @deprecated As of version 1.1, use . . . instead
-   */
-  @Deprecated
+    /**
+     * This is a simple description of the method. . . <a
+     * href="http://www.supermanisthegreatest.com">Superman!</a>
+     *
+     * @param incomingDamage the amount of incoming damage for {@link SuperHero}
+     * @param damageType     type of damage with similar word damageTypeLong, sure
+     * @return the amount of health hero has after attack
+     * @throws IllegalArgumentException when incomingDamage is negative and thanks for {@link
+     *                                  Exception}
+     * @version 1.2
+     * @see <a href="http://www.link_to_jira/HERO-402">HERO-402</a>
+     * @since 1.0
+     * @deprecated As of version 1.1, use . . . instead
+     */
+    @Deprecated
   public int successfullyAttacked(int incomingDamage, String damageType)
       throws IllegalArgumentException {
     // do things
@@ -54,11 +71,21 @@ public class SuperHero extends Person implements Serializable, Cloneable {
     return 0;
   }
 
-  public String getHeroName() {
+    /**
+     * Gets hero name.
+     *
+     * @return the hero name
+     */
+    public String getHeroName() {
     return heroName;
   }
 
-  public void setHeroName(String heroName) {
+    /**
+     * Sets hero name.
+     *
+     * @param heroName the hero name
+     */
+    public void setHeroName(String heroName) {
     this.heroName = heroName;
   }
 
@@ -74,27 +101,57 @@ public class SuperHero extends Person implements Serializable, Cloneable {
     return StringUtils.upperCase(super.getLastName());
   }
 
-  public String getUniquePower() {
+    /**
+     * Gets unique power.
+     *
+     * @return the unique power
+     */
+    public String getUniquePower() {
     return uniquePower;
   }
 
-  public void setUniquePower(String uniquePower) {
+    /**
+     * Sets unique power.
+     *
+     * @param uniquePower the unique power
+     */
+    public void setUniquePower(String uniquePower) {
     this.uniquePower = uniquePower;
   }
 
-  protected int getHealth() {
+    /**
+     * Gets health.
+     *
+     * @return the health
+     */
+    protected int getHealth() {
     return health;
   }
 
-  protected void setHealth(int health) {
+    /**
+     * Sets health.
+     *
+     * @param health the health
+     */
+    protected void setHealth(int health) {
     this.health = health;
   }
 
-  public int getDefense() {
+    /**
+     * Gets defense.
+     *
+     * @return the defense
+     */
+    public int getDefense() {
     return defense;
   }
 
-  public void setDefense(int defense) {
+    /**
+     * Sets defense.
+     *
+     * @param defense the defense
+     */
+    public void setDefense(int defense) {
     this.defense = defense;
   }
 
@@ -102,7 +159,12 @@ public class SuperHero extends Person implements Serializable, Cloneable {
     this.hobby = hobby;
   }
 
-  String getHobby() {
+    /**
+     * Gets hobby.
+     *
+     * @return the hobby
+     */
+    String getHobby() {
     return hobby;
   }
 }

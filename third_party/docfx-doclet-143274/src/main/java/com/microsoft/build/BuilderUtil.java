@@ -30,6 +30,9 @@ import javax.lang.model.element.Element;
 import org.apache.commons.lang3.RegExUtils;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * The type Builder util.
+ */
 final class BuilderUtil {
   private static final Pattern XREF_LINK_PATTERN =
       Pattern.compile("<xref uid=\".*?\" .*?>.*?</xref>");
@@ -37,8 +40,18 @@ final class BuilderUtil {
       Pattern.compile("(?<=<xref uid=\").*?(?=\" .*?>.*?</xref>)");
   private static final Pattern XREF_LINK_RESOLVE_PATTERN =
       Pattern.compile("(?<class>\\w+)\\#(?<member>\\w+)(\\((?<param>.*)\\))?");
+  /**
+   * The constant LANGS.
+   */
   public static final String[] LANGS = {"java"};
 
+  /**
+   * Populate uid values string.
+   *
+   * @param text          the text
+   * @param lookupContext the lookup context
+   * @return the string
+   */
   static String populateUidValues(String text, LookupContext lookupContext) {
     if (StringUtils.isBlank(text)) {
       return text;
@@ -63,6 +76,10 @@ final class BuilderUtil {
   /**
    * The linkContent could be in following format #memeber Class#member Class#method()
    * Class#method(params)
+   *
+   * @param linkContent   the link content
+   * @param lookupContext the lookup context
+   * @return the string
    */
   static String resolveUidFromLinkContent(String linkContent, LookupContext lookupContext) {
     if (StringUtils.isBlank(linkContent)) {
@@ -86,11 +103,23 @@ final class BuilderUtil {
     return exactResolveUid.isEmpty() ? fuzzyResolvedUid : exactResolveUid;
   }
 
+  /**
+   * Split uid with generics into class names list.
+   *
+   * @param uid the uid
+   * @return the list
+   */
   static List<String> splitUidWithGenericsIntoClassNames(String uid) {
     uid = RegExUtils.removeAll(uid, "[>]+$");
     return Arrays.asList(StringUtils.split(uid, "<"));
   }
 
+  /**
+   * Replace uid and split list.
+   *
+   * @param uid the uid
+   * @return the list
+   */
   static List<String> replaceUidAndSplit(String uid) {
     String retValue = RegExUtils.replaceAll(uid, "\\<", "//<//");
     retValue = RegExUtils.replaceAll(retValue, "\\>", "//>//");
@@ -100,6 +129,12 @@ final class BuilderUtil {
     return Arrays.asList(StringUtils.split(retValue, "//"));
   }
 
+  /**
+   * Gets java spec.
+   *
+   * @param references the references
+   * @return the java spec
+   */
   static List<SpecViewModel> getJavaSpec(List<String> references) {
     List<SpecViewModel> specList = new ArrayList<>();
 
@@ -118,6 +153,12 @@ final class BuilderUtil {
     return specList;
   }
 
+  /**
+   * Populate uid values.
+   *
+   * @param packageMetadataFiles the package metadata files
+   * @param classMetadataFiles   the class metadata files
+   */
   static void populateUidValues(
       List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
     Lookup lookup = new Lookup(packageMetadataFiles, classMetadataFiles);
@@ -157,6 +198,10 @@ final class BuilderUtil {
   /**
    * this method is used to do fuzzy resolve "*" will be added at the end of uid for method for xerf
    * service resolve purpose
+   *
+   * @param linkContent   the link content
+   * @param lookupContext the lookup context
+   * @return the string
    */
   static String resolveUidFromReference(String linkContent, LookupContext lookupContext) {
     String uid = "";
@@ -178,6 +223,13 @@ final class BuilderUtil {
     return uid;
   }
 
+  /**
+   * Resolve uid by lookup string.
+   *
+   * @param signature     the signature
+   * @param lookupContext the lookup context
+   * @return the string
+   */
   static String resolveUidByLookup(String signature, LookupContext lookupContext) {
     if (StringUtils.isBlank(signature) || lookupContext == null) {
       return "";
@@ -185,6 +237,14 @@ final class BuilderUtil {
     return lookupContext.containsKey(signature) ? lookupContext.resolve(signature) : "";
   }
 
+  /**
+   * Populate item fields.
+   *
+   * @param <T>     the type parameter
+   * @param item    the item
+   * @param lookup  the lookup
+   * @param element the element
+   */
   static <T extends Element> void populateItemFields(
       MetadataFileItem item, BaseLookup<T> lookup, T element) {
     String name = lookup.extractName(element);
@@ -198,7 +258,13 @@ final class BuilderUtil {
     item.setContent(lookup.extractContent(element));
   }
 
-  /** Does not include syntax contents for Client classes as they are not useful */
+  /**
+   * Does not include syntax contents for Client classes as they are not useful  @param <T>  the type parameter
+   *
+   * @param item    the item
+   * @param lookup  the lookup
+   * @param element the element
+   */
   static <T extends Element> void populateItemFieldsForClients(
       MetadataFileItem item, BaseLookup<T> lookup, T element) {
     String name = lookup.extractName(element);

@@ -38,10 +38,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Class items lookup test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class ClassItemsLookupTest {
 
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private List<Element> allGenderElements;
   private List<Element> allPersonElements;
@@ -56,7 +62,10 @@ public class ClassItemsLookupTest {
   private IdentifierTree identifierTree;
   private ClassItemsLookup classItemsLookup;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     allGenderElements =
@@ -83,7 +92,10 @@ public class ClassItemsLookupTest {
     classItemsLookup = new ClassItemsLookup(environment, Mockito.mock(ElementUtil.class));
   }
 
-  @Test
+    /**
+     * Extract parameters.
+     */
+    @Test
   public void extractParameters() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
@@ -115,7 +127,10 @@ public class ClassItemsLookupTest {
         "Wrong second param description", result.get(1).getDescription(), "some text bla-bla");
   }
 
-  @Test
+    /**
+     * Extract parameter description.
+     */
+    @Test
   public void extractParameterDescription() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
@@ -139,7 +154,10 @@ public class ClassItemsLookupTest {
     assertEquals("Wrong param description", result, "some weird text");
   }
 
-  @Test
+    /**
+     * Extract exceptions.
+     */
+    @Test
   public void extractExceptions() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
@@ -163,7 +181,10 @@ public class ClassItemsLookupTest {
     assertEquals("Wrong description", result.get(0).getDescription(), "some text");
   }
 
-  @Test
+    /**
+     * Extract exception description.
+     */
+    @Test
   public void extractExceptionDescription() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExecutableElement method = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
@@ -185,7 +206,10 @@ public class ClassItemsLookupTest {
     assertEquals("Wrong description", result, "some weird text");
   }
 
-  @Test
+    /**
+     * Extract return for executable element.
+     */
+    @Test
   public void extractReturnForExecutableElement() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExecutableElement method0 = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
@@ -225,7 +249,10 @@ public class ClassItemsLookupTest {
     assertNull(classItemsLookup.extractReturn(executableElement));
   }
 
-  @Test
+    /**
+     * Extract return description.
+     */
+    @Test
   public void extractReturnDescription() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     ExecutableElement method0 = ElementFilter.methodsIn(element.getEnclosedElements()).get(0);
@@ -247,7 +274,10 @@ public class ClassItemsLookupTest {
     assertEquals("Wrong description", result, "bla-bla description");
   }
 
-  @Test
+    /**
+     * Extract return for variable element.
+     */
+    @Test
   public void extractReturnForVariableElement() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.SuperHero");
 
@@ -268,7 +298,10 @@ public class ClassItemsLookupTest {
     assertEquals(result.getReturnType(), expectedType);
   }
 
-  @Test
+    /**
+     * Convert full name to overload.
+     */
+    @Test
   public void convertFullNameToOverload() {
     assertEquals(
         "Wrong result",
@@ -288,7 +321,10 @@ public class ClassItemsLookupTest {
         "com.microsoft.samples.SuperHero.SuperHero*");
   }
 
-  @Test
+    /**
+     * Determine type for enum constant.
+     */
+    @Test
   public void determineTypeForEnumConstant() {
     TypeElement element =
         elements.getTypeElement(
@@ -298,19 +334,28 @@ public class ClassItemsLookupTest {
     assertEquals(classItemsLookup.determineType(element.getEnclosedElements().get(1)), "Field");
   }
 
-  @Test
+    /**
+     * Test extract java type static method.
+     */
+    @Test
   public void testExtractJavaTypeStaticMethod() {
     Element staticMethod = getElementByName(allGenderElements, "valueOf(java.lang.String)");
     assertEquals("Wrong javaType", "static method", classItemsLookup.extractJavaType(staticMethod));
   }
 
-  @Test
+    /**
+     * Test extract java type static field.
+     */
+    @Test
   public void testExtractJavaTypeStaticField() {
     Element field = getElementByName(allGenderElements, "FEMALE");
     assertEquals("Wrong javaType", "static field", classItemsLookup.extractJavaType(field));
   }
 
-  @Test
+    /**
+     * Test extract java type non static.
+     */
+    @Test
   public void testExtractJavaTypeNonStatic() {
     Element constructor = getElementByName(allGenderElements, "Gender()");
     assertEquals("Wrong javaType", null, classItemsLookup.extractJavaType(constructor));

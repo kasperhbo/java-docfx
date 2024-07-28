@@ -5,12 +5,18 @@ import static com.google.common.truth.Truth.assertThat;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * The type Api version package toc test.
+ */
 public class ApiVersionPackageTocTest {
   private static final TocItem TOC_ITEM = new TocItem("a", "b", "");
 
   private final ApiVersionPackageToc toc = new ApiVersionPackageToc();
 
-  @Test
+    /**
+     * Test uncategorized.
+     */
+    @Test
   public void testUncategorized() {
     toc.addUncategorized(TOC_ITEM);
     List<TocItem> tocItems = toc.toList();
@@ -27,7 +33,10 @@ public class ApiVersionPackageTocTest {
     assertThat(uncategorized.getItems().get(0)).isEqualTo(TOC_ITEM);
   }
 
-  @Test
+    /**
+     * Test clients.
+     */
+    @Test
   public void testClients() {
     toc.addClient(TOC_ITEM);
     List<TocItem> tocItems = toc.toList();
@@ -40,7 +49,10 @@ public class ApiVersionPackageTocTest {
     assertThat(clients.getItems().get(0)).isEqualTo(TOC_ITEM);
   }
 
-  @Test
+    /**
+     * Test visible and hidden.
+     */
+    @Test
   public void testVisibleAndHidden() {
     toc.addRequestOrResponse(TOC_ITEM);
     toc.addSettings(new TocItem("TestSettings", "TestSettings", ""));

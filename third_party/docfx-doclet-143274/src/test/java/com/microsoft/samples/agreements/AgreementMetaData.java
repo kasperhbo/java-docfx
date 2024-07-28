@@ -11,11 +11,21 @@ public class AgreementMetaData {
   @JsonProperty("templateId")
   private String templateId;
 
-  public String getTemplateId() {
+    /**
+     * Gets template id.
+     *
+     * @return the template id
+     */
+    public String getTemplateId() {
     return templateId;
   }
 
-  public void setTemplateId(String value) {
+    /**
+     * Sets template id.
+     *
+     * @param value the value
+     */
+    public void setTemplateId(String value) {
     templateId = value;
   }
 
@@ -30,11 +40,21 @@ public class AgreementMetaData {
   @JsonProperty("agreementLink")
   private String agreementLink;
 
-  public String getAgreementLink() {
+    /**
+     * Gets agreement link.
+     *
+     * @return the agreement link
+     */
+    public String getAgreementLink() {
     return agreementLink;
   }
 
-  public void setAgreementLink(String value) {
+    /**
+     * Sets agreement link.
+     *
+     * @param value the value
+     */
+    public void setAgreementLink(String value) {
     agreementLink = value;
   }
 
@@ -42,11 +62,21 @@ public class AgreementMetaData {
   @JsonProperty("versionRank")
   private int versionRank;
 
-  public int getVersionRank() {
+    /**
+     * Gets version rank.
+     *
+     * @return the version rank
+     */
+    public int getVersionRank() {
     return versionRank;
   }
 
-  public void setVersionRank(int value) {
+    /**
+     * Sets version rank.
+     *
+     * @param value the value
+     */
+    public void setVersionRank(int value) {
     versionRank = value;
   }
 }

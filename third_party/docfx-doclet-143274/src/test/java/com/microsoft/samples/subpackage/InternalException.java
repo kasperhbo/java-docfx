@@ -1,8 +1,16 @@
 package com.microsoft.samples.subpackage;
 
+/**
+ * The type Internal exception.
+ */
 class InternalException extends Exception {
 
-  public InternalException(String message) {
+    /**
+     * Instantiates a new Internal exception.
+     *
+     * @param message the message
+     */
+    public InternalException(String message) {
     super(message);
   }
 }

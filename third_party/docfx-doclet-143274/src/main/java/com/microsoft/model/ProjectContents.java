@@ -18,22 +18,41 @@ package com.microsoft.model;
 
 import java.util.List;
 
+/**
+ * The type Project contents.
+ */
 //  wraps guides + tocItems with product name hierarchy
 //  [name: project-name, [items: [...]]]
 public class ProjectContents {
   private final String name;
   private final List<Object> items;
 
-  public ProjectContents(String name, List<Object> items) {
+    /**
+     * Instantiates a new Project contents.
+     *
+     * @param name  the name
+     * @param items the items
+     */
+    public ProjectContents(String name, List<Object> items) {
     this.name = name;
     this.items = items;
   }
 
-  public String getName() {
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
     return name;
   }
 
-  public List<Object> getItems() {
+    /**
+     * Gets items.
+     *
+     * @return the items
+     */
+    public List<Object> getItems() {
     return items;
   }
 }

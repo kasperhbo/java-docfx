@@ -15,20 +15,39 @@
  */
 package com.microsoft.model;
 
+/**
+ * The type Kind title.
+ */
 public class KindTitle {
   private final String elementKind;
   private final String title;
 
-  public KindTitle(String elementKind, String title) {
+    /**
+     * Instantiates a new Kind title.
+     *
+     * @param elementKind the element kind
+     * @param title       the title
+     */
+    public KindTitle(String elementKind, String title) {
     this.elementKind = elementKind;
     this.title = title;
   }
 
-  public String getElementKind() {
+    /**
+     * Gets element kind.
+     *
+     * @return the element kind
+     */
+    public String getElementKind() {
     return elementKind;
   }
 
-  public String getTitle() {
+    /**
+     * Gets title.
+     *
+     * @return the title
+     */
+    public String getTitle() {
     return title;
   }
 }

@@ -9,6 +9,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * The type Lookup.
+ */
 public class Lookup {
 
   private static final int INITIAL_CAPACITY = 10000;
@@ -19,14 +22,26 @@ public class Lookup {
   private final String PARAM_PACKAGE_NAME_REGEXP = "(?<=[\\( ]).*?(?=[A-Z].*)";
   private final String METHOD_PARAMS_REGEXP = "\\s[^\\s]+?(?=[,)])";
 
-  public Lookup(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
+    /**
+     * Instantiates a new Lookup.
+     *
+     * @param packageMetadataFiles the package metadata files
+     * @param classMetadataFiles   the class metadata files
+     */
+    public Lookup(List<MetadataFile> packageMetadataFiles, List<MetadataFile> classMetadataFiles) {
     this.globalLookup = new HashMap<>(INITIAL_CAPACITY);
     this.localLookupByFileName = new HashMap<>(INITIAL_CAPACITY);
     consume(packageMetadataFiles);
     consume(classMetadataFiles);
   }
 
-  public LookupContext buildContext(MetadataFile metadataFile) {
+    /**
+     * Build context lookup context.
+     *
+     * @param metadataFile the metadata file
+     * @return the lookup context
+     */
+    public LookupContext buildContext(MetadataFile metadataFile) {
     Map<String, String> localLookup = localLookupByFileName.get(metadataFile.getFileNameWithPath());
     return new LookupContext(globalLookup, localLookup);
   }

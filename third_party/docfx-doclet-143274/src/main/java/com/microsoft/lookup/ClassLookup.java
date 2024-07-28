@@ -21,12 +21,21 @@ import jdk.javadoc.doclet.DocletEnvironment;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
+/**
+ * The type Class lookup.
+ */
 public class ClassLookup extends BaseLookup<TypeElement> {
 
   private static final String JAVA_LANG_OBJECT = "java.lang.Object";
 
   private final ElementUtil elementUtil;
 
+  /**
+   * Instantiates a new Class lookup.
+   *
+   * @param environment the environment
+   * @param elementUtil the element util
+   */
   public ClassLookup(DocletEnvironment environment, ElementUtil elementUtil) {
     super(environment);
     this.elementUtil = elementUtil;
@@ -64,6 +73,13 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     return result;
   }
 
+  /**
+   * Populate content.
+   *
+   * @param classElement                 the class element
+   * @param shortNameWithGenericsSupport the short name with generics support
+   * @param container                    the container
+   */
   void populateContent(
       TypeElement classElement,
       String shortNameWithGenericsSupport,
@@ -110,11 +126,22 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     container.setContent(result);
   }
 
+  /**
+   * Add superclass to references map.
+   *
+   * @param superclass the superclass
+   * @param container  the container
+   */
   void addSuperclassToReferencesMap(String superclass, ExtendedMetadataFileItem container) {
     container.addReferences(
         Set.of(new MetadataFileItem(superclass, makeTypeShort(superclass), false)));
   }
 
+  /**
+   * Add inherited methods to references map.
+   *
+   * @param container the container
+   */
   void addInheritedMethodsToReferencesMap(ExtendedMetadataFileItem container) {
     container.addReferences(
         container.getInheritedMethods().stream()
@@ -122,6 +149,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             .collect(Collectors.toSet()));
   }
 
+  /**
+   * Add interfaces to references map.
+   *
+   * @param interfaces the interfaces
+   * @param container  the container
+   */
   void addInterfacesToReferencesMap(
       List<? extends TypeMirror> interfaces, ExtendedMetadataFileItem container) {
     container.addReferences(
@@ -131,6 +164,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
             .collect(Collectors.toSet()));
   }
 
+  /**
+   * Determine superclass string.
+   *
+   * @param classElement the class element
+   * @return the string
+   */
   String determineSuperclass(TypeElement classElement) {
     TypeMirror superclass = classElement.getSuperclass();
     if (superclass.getKind() == TypeKind.NONE) {
@@ -139,6 +178,14 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     return String.valueOf(superclass);
   }
 
+  /**
+   * Determine nested superclass list.
+   *
+   * @param classElement     the class element
+   * @param result           the result
+   * @param inheritedMethods the inherited methods
+   * @return the list
+   */
   List<String> determineNestedSuperclass(
       TypeElement classElement,
       ExtendedMetadataFileItem result,
@@ -163,12 +210,24 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     return nestedList;
   }
 
+  /**
+   * Determine type parameters list.
+   *
+   * @param element the element
+   * @return the list
+   */
   List<TypeParameter> determineTypeParameters(TypeElement element) {
     return element.getTypeParameters().stream()
         .map(typeParameter -> new TypeParameter(String.valueOf(typeParameter)))
         .collect(Collectors.toList());
   }
 
+  /**
+   * Append inherited methods.
+   *
+   * @param element          the element
+   * @param inheritedMethods the inherited methods
+   */
   void appendInheritedMethods(
       TypeElement element, List<ExtendedMetadataFileItem> inheritedMethods) {
     List<? extends Element> members = elementUtil.getEnclosedElements(element);
@@ -187,6 +246,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     }
   }
 
+  /**
+   * Gets max nested level.
+   *
+   * @param inheritedMethods the inherited methods
+   * @return the max nested level
+   */
   Integer getMaxNestedLevel(List<ExtendedMetadataFileItem> inheritedMethods) {
     Integer level = 0;
 
@@ -200,6 +265,12 @@ public class ClassLookup extends BaseLookup<TypeElement> {
     return level;
   }
 
+  /**
+   * Determine inherited members list.
+   *
+   * @param inheritedMethods the inherited methods
+   * @return the list
+   */
   List<String> determineInheritedMembers(List<ExtendedMetadataFileItem> inheritedMethods) {
 
     if (!inheritedMethods.isEmpty()) {

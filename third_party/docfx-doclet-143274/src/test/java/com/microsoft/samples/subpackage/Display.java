@@ -7,10 +7,19 @@ import java.util.List;
  * Do you see some <code>First</code> code block?
  *
  * <p>Or this {@code Second} code block?
+ *
+ * @param <T> the type parameter
+ * @param <R> the type parameter
  */
 public interface Display<T, R> extends Serializable, List<Person<T>> {
 
-  void show();
+    /**
+     * Show.
+     */
+    void show();
 
-  void hide();
+    /**
+     * Hide.
+     */
+    void hide();
 }

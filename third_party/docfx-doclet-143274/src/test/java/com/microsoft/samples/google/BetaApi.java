@@ -63,6 +63,8 @@ import java.lang.annotation.Target;
 })
 @Documented
 public @interface BetaApi {
-  /** Context information such as links to a discussion thread, tracking issue, etc. */
-  String value() default "";
+    /**
+     * Context information such as links to a discussion thread, tracking issue, etc.  @return the string
+     */
+    String value() default "";
 }

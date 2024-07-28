@@ -22,9 +22,15 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Toc type map test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class TocTypeMapTest {
-  @Test
+    /**
+     * Element kinds exist in map.
+     */
+    @Test
   public void elementKindsExistInMap() {
     TocTypeMap tocTypeMap = new TocTypeMap();
     List<KindTitle> titleList = tocTypeMap.getTitleList();

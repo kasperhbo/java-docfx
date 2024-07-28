@@ -8,30 +8,37 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.annotation.Nullable;
 
+/**
+ * The type Api version.
+ */
 public class ApiVersion implements Comparable<ApiVersion> {
-  public static ApiVersion NONE = new ApiVersion("", 0, 0, null, 0);
+    /**
+     * The constant NONE.
+     */
+    public static ApiVersion NONE = new ApiVersion("", 0, 0, null, 0);
 
   private static final Pattern VALID_VERSION_REGEX =
       Pattern.compile("^v(\\d+)p?(\\d+)?(alpha|beta)?(\\d+)?");
 
-  /**
-   * Creates an ApiVersion instance, if the given input matches the correct format.
-   *
-   * <p>Supported Format:
-   *
-   * <pre>
-   * v1p2beta3
-   *  │└┤└──┤│
-   *  │ │   ││
-   *  │ │   │└─── Optional: Prerelease major version
-   *  │ │   └──── Optional: Stability level. See <a href="https://google.aip.dev/181">AIP 181</a>
-   *  │ └──────── Optional: Minor version
-   *  └────────── Required: Major version
-   * </pre>
-   *
-   * @return Optional.empty() if the given input doesn't match the version pattern
-   */
-  public static Optional<ApiVersion> parse(@Nullable String input) {
+    /**
+     * Creates an ApiVersion instance, if the given input matches the correct format.
+     *
+     * <p>Supported Format:
+     *
+     * <pre>
+     * v1p2beta3
+     *  │└┤└──┤│
+     *  │ │   ││
+     *  │ │   │└─── Optional: Prerelease major version
+     *  │ │   └──── Optional: Stability level. See <a href="https://google.aip.dev/181">AIP 181</a>
+     *  │ └──────── Optional: Minor version
+     *  └────────── Required: Major version
+     * </pre>
+     *
+     * @param input the input
+     * @return Optional.empty() if the given input doesn't match the version pattern
+     */
+    public static Optional<ApiVersion> parse(@Nullable String input) {
     if (input != null) {
       Matcher matcher = VALID_VERSION_REGEX.matcher(input);
       if (matcher.matches()) {
@@ -54,7 +61,13 @@ public class ApiVersion implements Comparable<ApiVersion> {
     return Integer.parseInt(input);
   }
 
-  public static ApiVersion getRecommended(Collection<ApiVersion> versions) {
+    /**
+     * Gets recommended.
+     *
+     * @param versions the versions
+     * @return the recommended
+     */
+    public static ApiVersion getRecommended(Collection<ApiVersion> versions) {
     if (versions.size() == 1) {
       return versions.iterator().next();
     }
@@ -83,7 +96,12 @@ public class ApiVersion implements Comparable<ApiVersion> {
     this.prerelease = prerelease;
   }
 
-  public boolean isStable() {
+    /**
+     * Is stable boolean.
+     *
+     * @return the boolean
+     */
+    public boolean isStable() {
     return stability == null;
   }
 

@@ -31,6 +31,9 @@ import java.util.stream.Collectors;
 
 import static com.microsoft.build.BuilderUtil.*;
 
+/**
+ * The type Class builder.
+ */
 class ClassBuilder {
 
     private static final String           OPEN_TABLE = "<td><a href=\"";
@@ -41,6 +44,16 @@ class ClassBuilder {
     private final        PackageLookup    packageLookup;
     private final        ReferenceBuilder referenceBuilder;
 
+    /**
+     * Instantiates a new Class builder.
+     *
+     * @param elementUtil      the element util
+     * @param classLookup      the class lookup
+     * @param classItemsLookup the class items lookup
+     * @param outputPath       the output path
+     * @param packageLookup    the package lookup
+     * @param referenceBuilder the reference builder
+     */
     ClassBuilder(
             ElementUtil elementUtil,
             ClassLookup classLookup,
@@ -56,6 +69,14 @@ class ClassBuilder {
         this.referenceBuilder = referenceBuilder;
     }
 
+    /**
+     * Build files for package list.
+     *
+     * @param pkg                the pkg
+     * @param classMetadataFiles the class metadata files
+     * @param repoMetadata       the repo metadata
+     * @return the list
+     */
     List<TocItem> buildFilesForPackage(
             PackageElement pkg, List<MetadataFile> classMetadataFiles, RepoMetadata repoMetadata) {
         if (packageLookup.isApiVersionPackage(pkg) && containsAtLeastOneClient(pkg)) {
@@ -148,27 +169,64 @@ class ClassBuilder {
         }
     }
 
+    /**
+     * Contains at least one client boolean.
+     *
+     * @param pkg the pkg
+     * @return the boolean
+     */
     boolean containsAtLeastOneClient(PackageElement pkg) {
         return elementUtil.extractSortedElements(pkg).stream().anyMatch(this::isClient);
     }
 
+    /**
+     * Is client boolean.
+     *
+     * @param classElement the class element
+     * @return the boolean
+     */
     boolean isClient(TypeElement classElement) {
         return classLookup.extractTocName(classElement).endsWith("Client");
     }
 
+    /**
+     * Is resource name boolean.
+     *
+     * @param classElement the class element
+     * @return the boolean
+     */
     boolean isResourceName(TypeElement classElement) {
         return classElement.getInterfaces().stream()
                 .anyMatch(i -> String.valueOf(i).contains("ResourceName"));
     }
 
+    /**
+     * Is generated message boolean.
+     *
+     * @param classElement the class element
+     * @return the boolean
+     */
     boolean isGeneratedMessage(TypeElement classElement) {
         return String.valueOf(classElement.getSuperclass()).contains("GeneratedMessage");
     }
 
+    /**
+     * Is paging class boolean.
+     *
+     * @param classElement the class element
+     * @return the boolean
+     */
     boolean isPagingClass(TypeElement classElement) {
         return String.valueOf(classElement.getSuperclass()).contains(".paging.");
     }
 
+    /**
+     * Build files for standard package.
+     *
+     * @param element            the element
+     * @param tocTypeMap         the toc type map
+     * @param classMetadataFiles the class metadata files
+     */
     void buildFilesForStandardPackage(
             Element element, TocTypeMap tocTypeMap, List<MetadataFile> classMetadataFiles) {
         for (TypeElement classElement : elementUtil.extractSortedElements(element)) {
@@ -311,6 +369,12 @@ class ClassBuilder {
         classMetadataFile.getItems().add(classItem);
     }
 
+    /**
+     * Add constructors info.
+     *
+     * @param classElement      the class element
+     * @param classMetadataFile the class metadata file
+     */
     void addConstructorsInfo(TypeElement classElement, MetadataFile classMetadataFile) {
         for (ExecutableElement constructorElement :
                 ElementFilter.constructorsIn(elementUtil.getEnclosedElements(classElement))) {

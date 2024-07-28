@@ -16,6 +16,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type Doclet runner test.
+ */
 public class DocletRunnerTest {
 
   private final String PARAMS_DIR = "src/test/resources/test-doclet-params.txt";
@@ -27,6 +30,11 @@ public class DocletRunnerTest {
   private final PrintStream originalOut = System.out;
   private final PrintStream originalErr = System.err;
 
+  /**
+   * Cleanup.
+   *
+   * @throws IOException the io exception
+   */
   @Before
   public void cleanup() throws IOException {
     FileUtilTest.deleteDirectory(OUTPUT_DIR);
@@ -35,12 +43,18 @@ public class DocletRunnerTest {
     System.setErr(new PrintStream(errContent));
   }
 
+  /**
+   * Restore streams.
+   */
   @After
   public void restoreStreams() {
     System.setOut(originalOut);
     System.setErr(originalErr);
   }
 
+  /**
+   * Test files generation when no params.
+   */
   @Test
   public void testFilesGenerationWhenNoParams() {
     DocletRunner.main(new String[] {});
@@ -51,6 +65,9 @@ public class DocletRunnerTest {
         "Usage: java DocletRunner <options file> <argfile>");
   }
 
+  /**
+   * Test files generation when target file does not exist.
+   */
   @Test
   public void testFilesGenerationWhenTargetFileDoesNotExist() {
     try {
@@ -64,6 +81,11 @@ public class DocletRunnerTest {
     }
   }
 
+  /**
+   * Test files generation.
+   *
+   * @throws IOException the io exception
+   */
   @Test
   public void testFilesGeneration() throws IOException {
     DocletRunner.run(
@@ -104,6 +126,12 @@ public class DocletRunnerTest {
     }
   }
 
+  /**
+   * Assert same file names.
+   *
+   * @param expected  the expected
+   * @param generated the generated
+   */
   public void assertSameFileNames(List<Path> expected, List<Path> generated) {
     List<String> expectedFilenames =
         expected.stream().map(Path::getFileName).map(Path::toString).collect(Collectors.toList());

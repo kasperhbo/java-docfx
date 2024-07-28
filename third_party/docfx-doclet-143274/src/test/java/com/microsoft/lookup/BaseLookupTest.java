@@ -24,10 +24,16 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Base lookup test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class BaseLookupTest {
 
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private DocletEnvironment environment;
   private DocTrees docTrees;
@@ -40,7 +46,10 @@ public class BaseLookupTest {
   private BaseLookup<Element> baseLookup;
   private ExtendedMetadataFileItem lastBuiltItem;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     environment = Mockito.mock(DocletEnvironment.class);
@@ -62,7 +71,10 @@ public class BaseLookupTest {
         };
   }
 
-  @Test
+    /**
+     * Determine comment.
+     */
+    @Test
   public void determineComment() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
     when(environment.getDocTrees()).thenReturn(docTrees);
@@ -89,7 +101,10 @@ public class BaseLookupTest {
         "Some text 1<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>");
   }
 
-  @Test
+    /**
+     * Make type short.
+     */
+    @Test
   public void makeTypeShort() {
     assertEquals("Wrong result for primitive type", baseLookup.makeTypeShort("int"), "int");
     assertEquals("Wrong result", baseLookup.makeTypeShort("java.lang.String"), "String");
@@ -115,7 +130,10 @@ public class BaseLookupTest {
         "G<? extends List>");
   }
 
-  @Test
+    /**
+     * Build xref tag.
+     */
+    @Test
   public void buildXrefTag() {
     when(linkTree.getReference()).thenReturn(referenceTree);
     when(referenceTree.getSignature()).thenReturn("Some#signature");
@@ -129,7 +147,10 @@ public class BaseLookupTest {
         "<xref uid=\"Some#signature\" data-throw-if-not-resolved=\"false\">Some#signature</xref>");
   }
 
-  @Test
+    /**
+     * Build xref tag when label presents.
+     */
+    @Test
   public void buildXrefTagWhenLabelPresents() {
     when(linkTree.getReference()).thenReturn(referenceTree);
     when(referenceTree.getSignature()).thenReturn("Some#signature");
@@ -147,7 +168,10 @@ public class BaseLookupTest {
             + "</xref>");
   }
 
-  @Test
+    /**
+     * Build code tag.
+     */
+    @Test
   public void buildCodeTag() {
     String tagContent = "Some text ≤";
     when(literalTree.getBody()).thenReturn(textTree);
@@ -158,7 +182,10 @@ public class BaseLookupTest {
     assertEquals("Wrong result", result, "<code>" + tagContent + "</code>");
   }
 
-  @Test
+    /**
+     * Expand literal body.
+     */
+    @Test
   public void expandLiteralBody() {
     String tagContent = "Some text ≤ \u2264";
     when(literalTree.getBody()).thenReturn(textTree);
@@ -170,7 +197,10 @@ public class BaseLookupTest {
     assertEquals("Wrong result", result, expected);
   }
 
-  @Test
+    /**
+     * Replace links and codes.
+     */
+    @Test
   public void replaceLinksAndCodes() {
     when(linkTree.getReference()).thenReturn(referenceTree);
     when(referenceTree.getSignature()).thenReturn("Some#signature");
@@ -192,7 +222,10 @@ public class BaseLookupTest {
             + textTreeContent);
   }
 
-  @Test
+    /**
+     * Resolve.
+     */
+    @Test
   public void resolve() {
     TypeElement element1 = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
     TypeElement element2 = elements.getTypeElement("com.microsoft.samples.subpackage.Display");
@@ -209,7 +242,10 @@ public class BaseLookupTest {
         "Resolve for another key should return another instance", resultForKey2, resultForKey1);
   }
 
-  @Test
+    /**
+     * Test extract methods.
+     */
+    @Test
   public void testExtractMethods() {
     TypeElement element = elements.getTypeElement("com.microsoft.samples.subpackage.Person");
 
@@ -301,7 +337,10 @@ public class BaseLookupTest {
     return result;
   }
 
-  @Test
+    /**
+     * Test extract java type.
+     */
+    @Test
   public void testExtractJavaType() {
     assertEquals("Wrong javaType", baseLookup.extractJavaType(typeElement), null);
   }

@@ -5,11 +5,17 @@ import static org.junit.Assert.assertTrue;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * The type Options file util test.
+ */
 public class OptionsFileUtilTest {
 
   private final String PARAMS_DIR = "src/test/resources/test-doclet-params.txt";
 
-  @Test
+    /**
+     * Process options file.
+     */
+    @Test
   public void processOptionsFile() {
     List<String> strings = OptionsFileUtil.processOptionsFile(PARAMS_DIR);
 

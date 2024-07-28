@@ -12,17 +12,29 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 
+/**
+ * The type Package overview file test.
+ */
 public class PackageOverviewFileTest {
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     PackageElement element = elements.getPackageElement("com.microsoft.samples");
   }
 
-  @Test
+    /**
+     * Test extract package base uri before version.
+     */
+    @Test
   public void testExtractPackageBaseURIBeforeVersion() {
     Pattern pattern = Pattern.compile("(.*?)(v\\d+.*?)(?:\\.|$)");
     String packageName = "com.google.cloud.speech.v1";

@@ -29,8 +29,14 @@ import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
+/**
+ * The type Builder util test.
+ */
 public class BuilderUtilTest {
-  @Test
+    /**
+     * Populate uid values.
+     */
+    @Test
   public void populateUidValues() {
     MetadataFile classMetadataFile = new MetadataFile("output", "name");
 
@@ -93,7 +99,10 @@ public class BuilderUtilTest {
     item.setSyntax(syntax);
   }
 
-  @Test
+    /**
+     * Determine uid by link content.
+     */
+    @Test
   public void determineUidByLinkContent() {
     Map<String, String> lookup =
         new HashMap<>() {
@@ -127,7 +136,10 @@ public class BuilderUtilTest {
         "Wrong result for whitespace", BuilderUtil.resolveUidByLookup(" ", lookupContext), "");
   }
 
-  @Test
+    /**
+     * Split uid with generics into class names.
+     */
+    @Test
   public void splitUidWithGenericsIntoClassNames() {
     List<String> result =
         BuilderUtil.splitUidWithGenericsIntoClassNames("a.b.c.List<df.mn.ClassOne<tr.T>>");

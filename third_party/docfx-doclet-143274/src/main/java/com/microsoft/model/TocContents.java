@@ -19,10 +19,21 @@ package com.microsoft.model;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Toc contents.
+ */
 public class TocContents {
     private final String       projectName;
     private final List<Object> contents = new ArrayList<>();
 
+    /**
+     * Instantiates a new Toc contents.
+     *
+     * @param projectName            the project name
+     * @param disableChangelog       the disable changelog
+     * @param disableLibraryOverview the disable library overview
+     * @param items                  the items
+     */
     public TocContents(
             String projectName,
             boolean disableChangelog,
@@ -62,10 +73,20 @@ public class TocContents {
         );
     }
 
+    /**
+     * Gets contents.
+     *
+     * @return the contents
+     */
     public List<Object> getContents() {
         return contents;
     }
 
+    /**
+     * Gets project name.
+     *
+     * @return the project name
+     */
     public String getProjectName() {
         return projectName;
     }

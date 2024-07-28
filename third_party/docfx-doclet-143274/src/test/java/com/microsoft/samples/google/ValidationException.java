@@ -38,22 +38,33 @@ import java.util.Stack;
  * framework methods. Comes as an illegal argument exception subclass. Allows to globally set a
  * thread-local validation context description which each exception inherits.
  *
- * @see <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Google Cloud
- *     Storage error codes</a>
+ * @see <a href="https://cloud.google.com/storage/docs/json_api/v1/status-codes">Google Cloud     Storage error codes</a>
  */
 public class ValidationException extends IllegalArgumentException {
 
-  public interface Supplier<T> {
-    T get();
+    /**
+     * The interface Supplier.
+     *
+     * @param <T> the type parameter
+     */
+    public interface Supplier<T> {
+        /**
+         * Get t.
+         *
+         * @return the t
+         */
+        T get();
   }
 
   private static ThreadLocal<Stack<Supplier<String>>> contextLocal = new ThreadLocal<>();
 
-  /**
-   * Sets the validation context description. Each thread has its own description, so this is thread
-   * safe.
-   */
-  public static void pushCurrentThreadValidationContext(Supplier<String> supplier) {
+    /**
+     * Sets the validation context description. Each thread has its own description, so this is thread
+     * safe.
+     *
+     * @param supplier the supplier
+     */
+    public static void pushCurrentThreadValidationContext(Supplier<String> supplier) {
     Stack<Supplier<String>> stack = contextLocal.get();
     if (stack == null) {
       stack = new Stack<>();
@@ -62,7 +73,12 @@ public class ValidationException extends IllegalArgumentException {
     stack.push(supplier);
   }
 
-  public static void pushCurrentThreadValidationContext(final String context) {
+    /**
+     * Push current thread validation context.
+     *
+     * @param context the context
+     */
+    public static void pushCurrentThreadValidationContext(final String context) {
     pushCurrentThreadValidationContext(
         new Supplier<String>() {
           @Override
@@ -72,16 +88,22 @@ public class ValidationException extends IllegalArgumentException {
         });
   }
 
-  /** Clears the validation context. */
-  public static void popCurrentThreadValidationContext() {
+    /**
+     * Clears the validation context.
+     */
+    public static void popCurrentThreadValidationContext() {
     Stack<?> stack = contextLocal.get();
     if (stack != null) {
       stack.pop();
     }
   }
 
-  /** Construct validation exception with implicit context. */
-  public ValidationException(String format, Object... args) {
+    /**
+     * Construct validation exception with implicit context.  @param format the format
+     *
+     * @param args the args
+     */
+    public ValidationException(String format, Object... args) {
     super(message(contextLocal.get(), format, args));
   }
 

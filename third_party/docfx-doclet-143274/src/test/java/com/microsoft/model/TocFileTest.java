@@ -20,9 +20,15 @@ import static com.google.common.truth.Truth.assertThat;
 
 import org.junit.Test;
 
+/**
+ * The type Toc file test.
+ */
 public class TocFileTest {
 
-  @Test
+    /**
+     * Sorts by uid.
+     */
+    @Test
   public void sortsByUid() {
     TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false, false);
     TocItem tocItemA = new TocItem("a.uid.package.class", "name");
@@ -42,7 +48,10 @@ public class TocFileTest {
     assertThat(tocFile).containsExactly(tocItemA, tocItemB, tocItemC, olderItem).inOrder();
   }
 
-  @Test
+    /**
+     * Adds package overviews.
+     */
+    @Test
   public void addsPackageOverviews() {
     TocFile tocFile = new TocFile("outputPath", "google-cloud-project", false, false);
     TocItem tocItemA = new TocItem("a.uid.package.class", "name");

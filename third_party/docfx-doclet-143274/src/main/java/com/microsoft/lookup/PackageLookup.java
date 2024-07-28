@@ -22,8 +22,16 @@ import java.util.stream.Collectors;
 import javax.lang.model.element.PackageElement;
 import jdk.javadoc.doclet.DocletEnvironment;
 
+/**
+ * The type Package lookup.
+ */
 public class PackageLookup extends BaseLookup<PackageElement> {
 
+  /**
+   * Instantiates a new Package lookup.
+   *
+   * @param environment the environment
+   */
   public PackageLookup(DocletEnvironment environment) {
     super(environment);
   }
@@ -57,6 +65,12 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     return null;
   }
 
+  /**
+   * Determine package content string.
+   *
+   * @param packageElement the package element
+   * @return the string
+   */
   String determinePackageContent(PackageElement packageElement) {
     return "package " + packageElement.getQualifiedName();
   }
@@ -70,6 +84,9 @@ public class PackageLookup extends BaseLookup<PackageElement> {
   }
 
   /**
+   * Is api version stub package boolean.
+   *
+   * @param pkg the pkg
    * @return true, if the package ends with 'stub' and its parent package is an API version
    */
   public boolean isApiVersionStubPackage(PackageElement pkg) {
@@ -77,6 +94,9 @@ public class PackageLookup extends BaseLookup<PackageElement> {
   }
 
   /**
+   * Is api version stub package name boolean.
+   *
+   * @param name the name
    * @return true, if the package ends with 'stub' and its parent package is an API version
    */
   @VisibleForTesting
@@ -89,6 +109,13 @@ public class PackageLookup extends BaseLookup<PackageElement> {
     return ApiVersion.parse(packagePath.get(stubIndex - 1)).isPresent();
   }
 
+  /**
+   * Find stub packages list.
+   *
+   * @param pkg      the pkg
+   * @param packages the packages
+   * @return the list
+   */
   public List<PackageElement> findStubPackages(
       PackageElement pkg, Collection<PackageElement> packages) {
     String expectedStubPackageBase = pkg.getQualifiedName() + ".stub";
@@ -102,26 +129,56 @@ public class PackageLookup extends BaseLookup<PackageElement> {
   private final Comparator<PackageElement> byComparingApiVersion =
       Comparator.comparing(pkg -> extractApiVersion(pkg).orElse(ApiVersion.NONE));
 
+  /**
+   * Extract api version optional.
+   *
+   * @param pkg the pkg
+   * @return the optional
+   */
   public Optional<ApiVersion> extractApiVersion(PackageElement pkg) {
     return extractApiVersion(String.valueOf(pkg.getQualifiedName()));
   }
 
+  /**
+   * Extract api version optional.
+   *
+   * @param name the name
+   * @return the optional
+   */
   public Optional<ApiVersion> extractApiVersion(String name) {
     return ApiVersion.parse(getLeafPackage(name));
   }
 
+  /**
+   * Is api version package boolean.
+   *
+   * @param pkg the pkg
+   * @return the boolean
+   */
   public boolean isApiVersionPackage(PackageElement pkg) {
     return extractApiVersion(pkg).isPresent();
   }
 
+  /**
+   * The enum Package group.
+   */
   public enum PackageGroup {
+    /**
+     * Visible package group.
+     */
     VISIBLE,
+    /**
+     * Older and prerelease package group.
+     */
     OLDER_AND_PRERELEASE
   }
 
   /**
    * Organize packages into PackageGroups, making some VISIBLE the rest hidden under the
    * OLDER_AND_PRERELEASE category.
+   *
+   * @param packages the packages
+   * @return the immutable list multimap
    */
   public ImmutableListMultimap<PackageGroup, PackageElement> organize(
       List<PackageElement> packages) {
@@ -161,6 +218,9 @@ public class PackageLookup extends BaseLookup<PackageElement> {
    *
    * <p>When packages are grouped, only one package within the group will be VISIBLE and the rest
    * will be placed in the OLDER_AND_PRERELEASE category.
+   *
+   * @param packages the packages
+   * @return the multimap
    */
   @VisibleForTesting
   Multimap<String, PackageElement> groupVersions(List<PackageElement> packages) {
@@ -181,10 +241,12 @@ public class PackageLookup extends BaseLookup<PackageElement> {
   }
 
   /**
-   * @throws java.lang.IllegalStateException if the collections has multiple entries, and any of the
-   *     packages are not versioned.
-   * @throws java.lang.IllegalArgumentException if the collection is empty or contains entries with
-   *     duplicate API versions.
+   * Gets recommended.
+   *
+   * @param packages the packages
+   * @return the recommended
+   * @throws java.lang.IllegalStateException    if the collections has multiple entries, and any of the     packages are not versioned.
+   * @throws java.lang.IllegalArgumentException if the collection is empty or contains entries with     duplicate API versions.
    */
   @VisibleForTesting
   PackageElement getRecommended(Collection<PackageElement> packages) {

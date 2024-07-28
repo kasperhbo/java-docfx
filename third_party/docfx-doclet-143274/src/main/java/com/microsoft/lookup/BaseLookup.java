@@ -19,11 +19,19 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * The type Base lookup.
+ *
+ * @param <T> the type parameter
+ */
 public abstract class BaseLookup<T extends Element> {
 
     private static final int    INITIAL_CAPACITY = 500000;
     private static final Logger logger           = LoggerFactory.getLogger(BaseLookup.class);
 
+    /**
+     * The Element kind lookup.
+     */
     protected final Map<ElementKind, String>         elementKindLookup =
             new HashMap<>() {
                 {
@@ -38,21 +46,50 @@ public abstract class BaseLookup<T extends Element> {
                     put(ElementKind.FIELD, "Field");
                 }
             };
+    /**
+     * The Environment.
+     */
     protected final DocletEnvironment                environment;
+    /**
+     * The Map.
+     */
     protected       Map<T, ExtendedMetadataFileItem> map;
 
+    /**
+     * Instantiates a new Base lookup.
+     *
+     * @param environment the environment
+     */
     protected BaseLookup(DocletEnvironment environment) {
         this.environment = environment;
         this.map         = new HashMap<>(INITIAL_CAPACITY);
     }
 
+    /**
+     * Resolve extended metadata file item.
+     *
+     * @param key the key
+     * @return the extended metadata file item
+     */
     protected ExtendedMetadataFileItem resolve(T key) {
         map.computeIfAbsent(key, this::buildMetadataFileItem);
         return map.get(key);
     }
 
+    /**
+     * Build metadata file item extended metadata file item.
+     *
+     * @param key the key
+     * @return the extended metadata file item
+     */
     protected abstract ExtendedMetadataFileItem buildMetadataFileItem(T key);
 
+    /**
+     * Extract package name string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractPackageName(T key) {
         logger.debug("Extracting package name for key: {}", key);
         String packageName = resolve(key).getPackageName();
@@ -61,6 +98,12 @@ public abstract class BaseLookup<T extends Element> {
         return packageName;
     }
 
+    /**
+     * Extract namespace string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractNamespace(T key) {
         logger.debug("Extracting namespace for key: {}", key);
         String namespace = resolve(key).getNamespace();
@@ -68,110 +111,266 @@ public abstract class BaseLookup<T extends Element> {
         return namespace;
     }
 
+    /**
+     * Extract full name string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractFullName(T key) {
         return resolve(key).getFullName();
     }
 
+    /**
+     * Extract name string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractName(T key) {
         return resolve(key).getName();
     }
 
+    /**
+     * Extract href string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractHref(T key) {
         return resolve(key).getHref();
     }
 
+    /**
+     * Extract parent string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractParent(T key) {
         return resolve(key).getParent();
     }
 
+    /**
+     * Extract id string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractId(T key) {
         return resolve(key).getId();
     }
 
+    /**
+     * Extract uid string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractUid(T key) {
         return resolve(key).getUid();
     }
 
+    /**
+     * Extract name with type string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractNameWithType(T key) {
         return resolve(key).getNameWithType();
     }
 
+    /**
+     * Extract method content string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractMethodContent(T key) {
         return resolve(key).getMethodContent();
     }
 
+    /**
+     * Extract field content string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractFieldContent(T key) {
         return resolve(key).getFieldContent();
     }
 
+    /**
+     * Extract constructor content string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractConstructorContent(T key) {
         return resolve(key).getConstructorContent();
     }
 
+    /**
+     * Extract overload string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractOverload(T key) {
         return resolve(key).getOverload();
     }
 
+    /**
+     * Extract parameters list.
+     *
+     * @param key the key
+     * @return the list
+     */
     public List<MethodParameter> extractParameters(T key) {
         return resolve(key).getParameters();
     }
 
+    /**
+     * Extract exceptions list.
+     *
+     * @param key the key
+     * @return the list
+     */
     public List<ExceptionItem> extractExceptions(T key) {
         return resolve(key).getExceptions();
     }
 
+    /**
+     * Extract return return.
+     *
+     * @param key the key
+     * @return the return
+     */
     public Return extractReturn(T key) {
         return resolve(key).getReturn();
     }
 
+    /**
+     * Extract summary string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractSummary(T key) {
         return resolve(key).getSummary();
     }
 
+    /**
+     * Extract type string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractType(T key) {
         return resolve(key).getType();
     }
 
+    /**
+     * Extract java type string.
+     *
+     * @param element the element
+     * @return the string
+     */
     public String extractJavaType(T element) {
         return null;
     }
 
+    /**
+     * Extract content string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractContent(T key) {
         return resolve(key).getContent();
     }
 
+    /**
+     * Extract type parameters list.
+     *
+     * @param key the key
+     * @return the list
+     */
     public List<TypeParameter> extractTypeParameters(T key) {
         return resolve(key).getTypeParameters();
     }
 
+    /**
+     * Extract superclass list.
+     *
+     * @param key the key
+     * @return the list
+     */
     public List<String> extractSuperclass(T key) {
         List<String> reversed = resolve(key).getSuperclass();
         Collections.reverse(reversed);
         return reversed;
     }
 
+    /**
+     * Extract inherited methods list.
+     *
+     * @param key the key
+     * @return the list
+     */
     public List<String> extractInheritedMethods(T key) {
         List<String> sorted = resolve(key).getInheritedMethods();
         Collections.sort(sorted);
         return sorted;
     }
 
+    /**
+     * Extract interfaces list.
+     *
+     * @param key the key
+     * @return the list
+     */
     public List<String> extractInterfaces(T key) {
         return resolve(key).getInterfaces();
     }
 
+    /**
+     * Extract toc name string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractTocName(T key) {
         return resolve(key).getTocName();
     }
 
+    /**
+     * Extract references set.
+     *
+     * @param key the key
+     * @return the set
+     */
     public Set<MetadataFileItem> extractReferences(T key) {
         return resolve(key).getReferences();
     }
 
+    /**
+     * Extract overridden string.
+     *
+     * @param key the key
+     * @return the string
+     */
     public String extractOverridden(T key) {
         return resolve(key).getOverridden();
     }
 
+    /**
+     * Gets doc comment tree.
+     *
+     * @param element the element
+     * @return the doc comment tree
+     */
     protected Optional<DocCommentTree> getDocCommentTree(T element) {
         return Optional.ofNullable(environment.getDocTrees().getDocCommentTree(element));
     }
@@ -185,14 +384,32 @@ public abstract class BaseLookup<T extends Element> {
         return javadocTags.stream().map(DocTree::getKind).anyMatch(DocTree.Kind.DEPRECATED::equals);
     }
 
+    /**
+     * Determine type string.
+     *
+     * @param element the element
+     * @return the string
+     */
     protected String determineType(T element) {
         return elementKindLookup.get(element.getKind());
     }
 
+    /**
+     * Determine package name string.
+     *
+     * @param element the element
+     * @return the string
+     */
     protected String determinePackageName(T element) {
         return String.valueOf(environment.getElementUtils().getPackageOf(element));
     }
 
+    /**
+     * Determine comment string.
+     *
+     * @param element the element
+     * @return the string
+     */
     protected String determineComment(T element) {
         String statusComment  = getStatusComment(element);
         String javadocComment = getJavadocComment(element);
@@ -211,6 +428,10 @@ public abstract class BaseLookup<T extends Element> {
 
     /**
      * Safely combine two nullable strings with a newline delimiter
+     *
+     * @param top    the top
+     * @param bottom the bottom
+     * @return the string
      */
     String joinNullable(@Nullable String top, @Nullable String bottom) {
         String a = top == null || top.isEmpty() ? null : top;
@@ -227,6 +448,10 @@ public abstract class BaseLookup<T extends Element> {
 
     /**
      * Provides support for deprecated and see tags
+     *
+     * @param docCommentTree the doc comment tree
+     * @param comment        the comment
+     * @return the string
      */
     String replaceBlockTags(DocCommentTree docCommentTree, String comment) {
         Set<String> seeItems             = new HashSet<>();
@@ -253,6 +478,9 @@ public abstract class BaseLookup<T extends Element> {
      * <li>Replace @link and @linkplain with <xref> tags</li>
      * <li>Replace @code with <code> tags</li>
      * </ul>
+     *
+     * @param items the items
+     * @return the string
      */
     String replaceLinksAndCodes(List<? extends DocTree> items) {
         return YamlUtil.cleanupHtml(
@@ -277,6 +505,9 @@ public abstract class BaseLookup<T extends Element> {
     /**
      * By using this way of processing links we provide support of @links with label, like this:
      * {@link List someLabel}
+     *
+     * @param linkTree the link tree
+     * @return the string
      */
     String buildXrefTag(LinkTree linkTree) {
         String signature = linkTree.getReference().getSignature();
@@ -289,17 +520,32 @@ public abstract class BaseLookup<T extends Element> {
                 "<xref uid=\"%s\" data-throw-if-not-resolved=\"false\">%s</xref>", signature, label);
     }
 
+    /**
+     * Build code tag string.
+     *
+     * @param literalTree the literal tree
+     * @return the string
+     */
     String buildCodeTag(LiteralTree literalTree) {
         return String.format(
                 "<code>%s</code>", StringEscapeUtils.unescapeJava(literalTree.getBody().toString()));
     }
 
+    /**
+     * Expand literal body string.
+     *
+     * @param bodyItem the body item
+     * @return the string
+     */
     String expandLiteralBody(LiteralTree bodyItem) {
         return String.valueOf(StringEscapeUtils.unescapeJava(bodyItem.getBody().toString()));
     }
 
     /**
      * We make type shortening in assumption that package name doesn't contain uppercase characters
+     *
+     * @param value the value
+     * @return the string
      */
     public String makeTypeShort(String value) {
         if (!value.contains(".")) {
@@ -331,6 +577,12 @@ public abstract class BaseLookup<T extends Element> {
                 "<xref uid=\"%1$s\" data-throw-if-not-resolved=\"false\">%1$s</xref>", ref);
     }
 
+    /**
+     * Extract status string.
+     *
+     * @param element the element
+     * @return the string
+     */
     public String extractStatus(T element) {
         List<String> annotationNames =
                 element.getAnnotationMirrors().stream()
@@ -347,6 +599,12 @@ public abstract class BaseLookup<T extends Element> {
         return null;
     }
 
+    /**
+     * Gets status comment.
+     *
+     * @param element the element
+     * @return the status comment
+     */
     public String getStatusComment(T element) {
         Map<String, Optional<String>> annotationComments = getAnnotationComments(element);
 
@@ -410,6 +668,9 @@ public abstract class BaseLookup<T extends Element> {
     }
 
     /**
+     * Gets annotation comments.
+     *
+     * @param element the element
      * @return all annotations on the element and their associated comment, if it exists
      */
     public Map<String, Optional<String>> getAnnotationComments(T element) {

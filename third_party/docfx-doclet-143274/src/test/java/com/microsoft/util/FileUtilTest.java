@@ -13,22 +13,40 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * The type File util test.
+ */
 public class FileUtilTest {
 
   private final String ROOT_DIR = "target/dir1";
   private final String FILE_NAME = ROOT_DIR + "/dir2/out.txt";
 
-  @Before
+    /**
+     * Sets .
+     *
+     * @throws IOException the io exception
+     */
+    @Before
   public void setup() throws IOException {
     deleteDirectory(ROOT_DIR);
   }
 
-  @After
+    /**
+     * Tear down.
+     *
+     * @throws IOException the io exception
+     */
+    @After
   public void tearDown() throws IOException {
     deleteDirectory(ROOT_DIR);
   }
 
-  @Test
+    /**
+     * Dump to file with directory creation.
+     *
+     * @throws IOException the io exception
+     */
+    @Test
   public void dumpToFileWithDirectoryCreation() throws IOException {
     String content = "Bla-bla content";
 
@@ -38,7 +56,12 @@ public class FileUtilTest {
     assertEquals("Invalid file content", Files.readString(Paths.get(FILE_NAME)), content);
   }
 
-  @Test
+    /**
+     * Dump to file for existing non empty directory.
+     *
+     * @throws IOException the io exception
+     */
+    @Test
   public void dumpToFileForExistingNonEmptyDirectory() throws IOException {
     createDirectoryWithFile(ROOT_DIR + "/dir2/tmp1.txt");
     String content = "Bla-bla content";
@@ -51,14 +74,26 @@ public class FileUtilTest {
     assertEquals("Invalid file content", Files.readString(Paths.get(FILE_NAME)), content);
   }
 
-  public static void deleteDirectory(String pathString) throws IOException {
+    /**
+     * Delete directory.
+     *
+     * @param pathString the path string
+     * @throws IOException the io exception
+     */
+    public static void deleteDirectory(String pathString) throws IOException {
     Path path = Paths.get(pathString);
     if (Files.exists(path)) {
       Files.walk(path).sorted(Comparator.reverseOrder()).map(Path::toFile).forEach(File::delete);
     }
   }
 
-  public static void createDirectoryWithFile(String pathString) throws IOException {
+    /**
+     * Create directory with file.
+     *
+     * @param pathString the path string
+     * @throws IOException the io exception
+     */
+    public static void createDirectoryWithFile(String pathString) throws IOException {
     Path path = Paths.get(pathString);
     Files.createDirectories(path.getParent());
     Files.createFile(path);

@@ -22,22 +22,34 @@ import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Package lookup test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class PackageLookupTest {
 
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private PackageLookup packageLookup;
   private DocletEnvironment environment;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     environment = Mockito.mock(DocletEnvironment.class);
     packageLookup = new PackageLookup(environment);
   }
 
-  @Test
+    /**
+     * Extract package content.
+     */
+    @Test
   public void extractPackageContent() {
     PackageElement element = elements.getPackageElement("com.microsoft.samples");
 
@@ -46,7 +58,10 @@ public class PackageLookupTest {
     assertEquals("Wrong result", result, "package com.microsoft.samples");
   }
 
-  @Test
+    /**
+     * Extract package status.
+     */
+    @Test
   public void extractPackageStatus() {
     PackageElement beta = elements.getPackageElement("com.microsoft.samples.google.v1beta");
     PackageElement alpha = elements.getPackageElement("com.microsoft.samples.google.v1p1alpha");
@@ -61,14 +76,20 @@ public class PackageLookupTest {
     assertThat(resultV1).isNull();
   }
 
-  @Test
+    /**
+     * Test extract java type.
+     */
+    @Test
   public void testExtractJavaType() {
     PackageElement packageElement =
         elements.getPackageElement("com.microsoft.samples.google.v1beta");
     assertEquals("Wrong javaType", packageLookup.extractJavaType(packageElement), "package");
   }
 
-  @Test
+    /**
+     * Test group versions.
+     */
+    @Test
   public void testGroupVersions() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -85,7 +106,10 @@ public class PackageLookupTest {
     assertThat(groupedPackages.keys()).hasCount("com.microsoft.samples", 1);
   }
 
-  @Test
+    /**
+     * Test recommendation.
+     */
+    @Test
   public void testRecommendation() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -98,7 +122,10 @@ public class PackageLookupTest {
         .isEqualTo("com.microsoft.samples.google.v1p1alpha");
   }
 
-  @Test
+    /**
+     * Test recommendation single package.
+     */
+    @Test
   public void testRecommendation_SinglePackage() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(elements.getPackageElement("com.microsoft.samples.google.v1beta"));
@@ -109,7 +136,10 @@ public class PackageLookupTest {
         .isEqualTo("com.microsoft.samples.google.v1beta");
   }
 
-  @Test
+    /**
+     * Test recommendation with unversioned package collection.
+     */
+    @Test
   public void testRecommendation_WithUnversionedPackageCollection() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -119,7 +149,10 @@ public class PackageLookupTest {
     assertThrows(IllegalStateException.class, () -> packageLookup.getRecommended(packages));
   }
 
-  @Test
+    /**
+     * Test recommendation with duplicates.
+     */
+    @Test
   public void testRecommendation_WithDuplicates() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -129,7 +162,10 @@ public class PackageLookupTest {
     assertThrows(IllegalArgumentException.class, () -> packageLookup.getRecommended(packages));
   }
 
-  @Test
+    /**
+     * Test organize.
+     */
+    @Test
   public void testOrganize() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -156,7 +192,10 @@ public class PackageLookupTest {
             "com.microsoft.samples.google.v1beta", "com.microsoft.samples.google.v1p1alpha");
   }
 
-  @Test
+    /**
+     * Test organize without release package.
+     */
+    @Test
   public void testOrganize_WithoutReleasePackage() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -178,7 +217,10 @@ public class PackageLookupTest {
         .containsExactly("com.microsoft.samples.google.v1beta");
   }
 
-  @Test
+    /**
+     * Test find stub package.
+     */
+    @Test
   public void testFindStubPackage() {
     ImmutableList<PackageElement> packages =
         ImmutableList.of(
@@ -206,7 +248,10 @@ public class PackageLookupTest {
     assertThat(notFoundStubPackage).isEmpty();
   }
 
-  @Test
+    /**
+     * Test is api stub package.
+     */
+    @Test
   public void testIsApiStubPackage() {
     assertThat(
             packageLookup.isApiVersionStubPackage(

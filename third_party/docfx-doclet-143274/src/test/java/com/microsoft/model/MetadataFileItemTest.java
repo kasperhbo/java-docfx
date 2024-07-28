@@ -7,9 +7,15 @@ import java.util.Arrays;
 import java.util.List;
 import org.junit.Test;
 
+/**
+ * The type Metadata file item test.
+ */
 public class MetadataFileItemTest {
 
-  @Test
+    /**
+     * Test equals.
+     */
+    @Test
   public void testEquals() {
     MetadataFileItem object1 = new MetadataFileItem("123");
     MetadataFileItem object2 = new MetadataFileItem("1234");
@@ -22,7 +28,10 @@ public class MetadataFileItemTest {
     assertTrue("Should be equal to object with same uid", object1.equals(object3));
   }
 
-  @Test
+    /**
+     * Test hash code.
+     */
+    @Test
   public void testHashCode() {
     String uid = "123";
     MetadataFileItem object = new MetadataFileItem(uid);
@@ -30,7 +39,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong result", uid.hashCode(), object.hashCode());
   }
 
-  @Test
+    /**
+     * Sets type parameters.
+     */
+    @Test
   public void setTypeParameters() {
     MetadataFileItem object = new MetadataFileItem("123");
     List<TypeParameter> typeParams = new ArrayList<>();
@@ -41,7 +53,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong typeParameters value", object.getSyntax().getTypeParameters(), typeParams);
   }
 
-  @Test
+    /**
+     * Sets type parameters when syntax already present.
+     */
+    @Test
   public void setTypeParametersWhenSyntaxAlreadyPresent() {
     MetadataFileItem object = new MetadataFileItem("123");
     Syntax existingSyntax = new Syntax();
@@ -54,7 +69,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong typeParameters value", object.getSyntax().getTypeParameters(), typeParams);
   }
 
-  @Test
+    /**
+     * Sets parameters.
+     */
+    @Test
   public void setParameters() {
     MetadataFileItem object = new MetadataFileItem("123");
     List<MethodParameter> params = new ArrayList<>();
@@ -65,7 +83,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong parameters value", object.getSyntax().getParameters(), params);
   }
 
-  @Test
+    /**
+     * Sets parameters when syntax already present.
+     */
+    @Test
   public void setParametersWhenSyntaxAlreadyPresent() {
     MetadataFileItem object = new MetadataFileItem("123");
     Syntax existingSyntax = new Syntax();
@@ -78,7 +99,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong parameters value", object.getSyntax().getParameters(), params);
   }
 
-  @Test
+    /**
+     * Sets return.
+     */
+    @Test
   public void setReturn() {
     MetadataFileItem object = new MetadataFileItem("123");
     Return returnValue = new Return("type");
@@ -89,7 +113,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong return value", object.getSyntax().getReturnValue(), returnValue);
   }
 
-  @Test
+    /**
+     * Sets return when syntax already present.
+     */
+    @Test
   public void setReturnWhenSyntaxAlreadyPresent() {
     MetadataFileItem object = new MetadataFileItem("123");
     Syntax existingSyntax = new Syntax();
@@ -102,7 +129,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong return value", object.getSyntax().getReturnValue(), returnValue);
   }
 
-  @Test
+    /**
+     * Sets content.
+     */
+    @Test
   public void setContent() {
     MetadataFileItem object = new MetadataFileItem("123");
     String content = "Some content";
@@ -113,7 +143,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong content value", object.getSyntax().getContent(), content);
   }
 
-  @Test
+    /**
+     * Sets content when syntax already present.
+     */
+    @Test
   public void setContentWhenSyntaxAlreadyPresent() {
     MetadataFileItem object = new MetadataFileItem("123");
     Syntax existingSyntax = new Syntax();
@@ -126,7 +159,10 @@ public class MetadataFileItemTest {
     assertEquals("Wrong content value", object.getSyntax().getContent(), content);
   }
 
-  @Test
+    /**
+     * Sets inheritance.
+     */
+    @Test
   public void setInheritance() {
     MetadataFileItem object = new MetadataFileItem("123");
 
@@ -136,7 +172,10 @@ public class MetadataFileItemTest {
     assertTrue("Wrong inheritance content", object.getInheritance().contains("Some value"));
   }
 
-  @Test
+    /**
+     * Sets inheritance for null.
+     */
+    @Test
   public void setInheritanceForNull() {
     MetadataFileItem object = new MetadataFileItem("123");
 
@@ -145,7 +184,10 @@ public class MetadataFileItemTest {
     assertNull("Wrong inheritance", object.getInheritance());
   }
 
-  @Test
+    /**
+     * Gets is external.
+     */
+    @Test
   public void getIsExternal() {
     assertNull("Wrong isExternal when null", (new MetadataFileItem("123")).getIsExternal());
     assertTrue(
@@ -155,7 +197,10 @@ public class MetadataFileItemTest {
         (new MetadataFileItem("123", "name", false)).getIsExternal());
   }
 
-  @Test
+    /**
+     * Sets java type.
+     */
+    @Test
   public void setJavaType() {
     MetadataFileItem metadataFileItem = new MetadataFileItem("123");
     assertNull("Wrong javaType when null", metadataFileItem.getJavaType());

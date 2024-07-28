@@ -10,9 +10,15 @@ import com.google.docfx.doclet.ApiVersion;
 import java.util.Collections;
 import org.junit.Test;
 
+/**
+ * The type Api version test.
+ */
 public class ApiVersionTest {
 
-  @Test
+    /**
+     * Bad format.
+     */
+    @Test
   public void badFormat() {
     assertFalse(ApiVersion.parse("badFormat").isPresent());
     assertFalse(ApiVersion.parse("1p1").isPresent());
@@ -21,7 +27,10 @@ public class ApiVersionTest {
     assertFalse(ApiVersion.parse("v1beta2p3").isPresent());
   }
 
-  @Test
+    /**
+     * Good format.
+     */
+    @Test
   public void goodFormat() {
     assertTrue(ApiVersion.parse("v99").isPresent());
     assertTrue(ApiVersion.parse("v1p2").isPresent());
@@ -32,7 +41,10 @@ public class ApiVersionTest {
     assertTrue(ApiVersion.parse("v3p1beta2").isPresent());
   }
 
-  @Test
+    /**
+     * Test ais greater than b.
+     */
+    @Test
   public void testAisGreaterThanB() {
     String[][] comparisons = {
       {"v3", "v2"},
@@ -54,7 +66,10 @@ public class ApiVersionTest {
     }
   }
 
-  @Test
+    /**
+     * Stability.
+     */
+    @Test
   public void stability() {
     assertTrue(parse("v12").isStable());
     assertTrue(parse("v1p3").isStable());
@@ -63,7 +78,10 @@ public class ApiVersionTest {
     assertFalse(parse("v1p1beta1").isStable());
   }
 
-  @Test
+    /**
+     * Equals.
+     */
+    @Test
   public void equals() {
     assertThat(parse("v1")).isEqualTo(parse("v1p0"));
     assertThat(parse("v1p0")).isEqualTo(parse("v1"));
@@ -74,7 +92,10 @@ public class ApiVersionTest {
     return ApiVersion.parse(s).orElseThrow(() -> new IllegalStateException("Unable to parse " + s));
   }
 
-  @Test
+    /**
+     * Test recommendation prioritizes release versions.
+     */
+    @Test
   public void testRecommendation_PrioritizesReleaseVersions() {
     ImmutableList<ApiVersion> versions =
         ImmutableList.of(parse("v101beta"), parse("v2p1"), parse("v1p14alpha15"), parse("v1"));
@@ -83,7 +104,10 @@ public class ApiVersionTest {
     assertThat(recommended).isEqualTo(parse("v2p1"));
   }
 
-  @Test
+    /**
+     * Test recommendation chooses latest prerelease when no release versions available.
+     */
+    @Test
   public void testRecommendation_ChoosesLatestPrerelease_WhenNoReleaseVersionsAvailable() {
     ImmutableList<ApiVersion> versions =
         ImmutableList.of(
@@ -93,7 +117,10 @@ public class ApiVersionTest {
     assertThat(recommended).isEqualTo(parse("v102alpha"));
   }
 
-  @Test
+    /**
+     * Test recommendation single option.
+     */
+    @Test
   public void testRecommendation_SingleOption() {
     ImmutableList<ApiVersion> versions = ImmutableList.of(parse("v1p14alpha15"));
 
@@ -101,13 +128,19 @@ public class ApiVersionTest {
     assertThat(recommended).isEqualTo(parse("v1p14alpha15"));
   }
 
-  @Test
+    /**
+     * Test recommendation does not allow empty input.
+     */
+    @Test
   public void testRecommendation_doesNotAllowEmptyInput() {
     assertThrows(
         IllegalArgumentException.class, () -> ApiVersion.getRecommended(Collections.emptyList()));
   }
 
-  @Test
+    /**
+     * Test to string.
+     */
+    @Test
   public void testToString() {
     assertThat(parse("v1").toString()).isEqualTo("v1");
     assertThat(parse("v1p0").toString()).isEqualTo("v1p0");

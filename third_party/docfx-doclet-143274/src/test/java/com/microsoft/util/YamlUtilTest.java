@@ -9,9 +9,15 @@ import java.util.Collections;
 import java.util.UUID;
 import org.junit.Test;
 
+/**
+ * The type Yaml util test.
+ */
 public class YamlUtilTest {
 
-  @Test
+    /**
+     * Object to yaml string.
+     */
+    @Test
   public void objectToYamlString() {
     MetadataFile metadataFile = new MetadataFile("", "SomeFileName");
     metadataFile.getItems().add(buildMetadataFileItem(3));
@@ -54,7 +60,10 @@ public class YamlUtilTest {
     return metadataFileItem;
   }
 
-  @Test
+    /**
+     * Cleanup html remove lone pre tags test.
+     */
+    @Test
   public void cleanupHtmlRemoveLonePreTagsTest() {
     String expectedActual = "<pre>text</pre>";
     String expectedResult = "text";
@@ -70,7 +79,10 @@ public class YamlUtilTest {
     assertEquals(expectedWithCode, YamlUtil.cleanupHtml(expectedWithCode));
   }
 
-  @Test
+    /**
+     * Cleanup html include pretty print test.
+     */
+    @Test
   public void cleanupHtmlIncludePrettyPrintTest() {
     String expectedActual = "<pre><code>";
     String expectedResult = "<pre class=\"prettyprint lang-java\"><code>";
@@ -88,7 +100,10 @@ public class YamlUtilTest {
             .contains("class=\"prettyprint lang-java\""));
   }
 
-  @Test
+    /**
+     * Cleanup html encode brackets test.
+     */
+    @Test
   public void cleanupHtmlEncodeBracketsTest() {
     String expectedActual =
         "<code> List<String> things = new ArrayList<>(); \n </code> <p>text</p> <Object>";
@@ -101,7 +116,10 @@ public class YamlUtilTest {
         random + expectedResult + random, YamlUtil.cleanupHtml(random + expectedActual + random));
   }
 
-  @Test
+    /**
+     * Cleanup html add code tags test.
+     */
+    @Test
   public void cleanupHtmlAddCodeTagsTest() {
     String expectedActual = "`text`";
     String expectedResult = "<code>text</code>";
@@ -117,7 +135,10 @@ public class YamlUtilTest {
     assertFalse(YamlUtil.cleanupHtml("`" + random).contains("<code>"));
   }
 
-  @Test
+    /**
+     * Cleanup html add href tags test.
+     */
+    @Test
   public void cleanupHtmlAddHrefTagsTest() {
     String expectedActual = "[text](link)";
     String expectedResult = "<a href=\"link\">text</a>";
@@ -133,7 +154,10 @@ public class YamlUtilTest {
     assertFalse(YamlUtil.cleanupHtml("[text(link)]").contains("href"));
   }
 
-  @Test
+    /**
+     * Cleanup html equal titles test.
+     */
+    @Test
   public void cleanupHtmlEqualTitlesTest() {
     String expectedActual = "======================= SpeechClient =======================";
     String expectedResult = "<h3> SpeechClient </h3>";
@@ -161,7 +185,10 @@ public class YamlUtilTest {
         "====== Markdown H1 Test ======", YamlUtil.cleanupHtml("====== Markdown H1 Test ======"));
   }
 
-  @Test
+    /**
+     * Cleanup html reference test.
+     */
+    @Test
   public void cleanupHtmlReferenceTest() {
     String expectedActual = "[KeyRing][google.cloud.kms.v1.KeyRing]";
     String expectedResult =
@@ -179,7 +206,10 @@ public class YamlUtilTest {
     assertFalse(YamlUtil.cleanupHtml("[text[uid]]").contains("xref"));
   }
 
-  @Test
+    /**
+     * Cleanup html link tag with link test.
+     */
+    @Test
   public void cleanupHtmlLinkTagWithLinkTest() {
     String expectedActual = "{@link \"http://www.bad-way-to-include-link.com#section\"}";
     String expectedResult =
@@ -194,7 +224,10 @@ public class YamlUtilTest {
         YamlUtil.cleanupHtml(expectedActual + random + expectedActual));
   }
 
-  @Test
+    /**
+     * Cleanup html link tag not recognized test.
+     */
+    @Test
   public void cleanupHtmlLinkTagNotRecognizedTest() {
     String expectedActual = "{@link WeirdLink#didntResolve(null)}";
     String expectedResult =

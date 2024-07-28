@@ -4,7 +4,9 @@ import static java.lang.System.out;
 
 import java.awt.*;
 
-/** Canine and man's best friend. */
+/**
+ * Canine and man's best friend.
+ */
 public class Dog extends Mammal implements Omnivorous, Viviparous {
   private final Color hairColor = null;
 
@@ -37,12 +39,12 @@ public class Dog extends Mammal implements Omnivorous, Viviparous {
   @Override
   public void giveBirth(final int numberPuppies) {}
 
-  /**
-   * Provide the color of the dog's hair.
-   *
-   * @return Color of the dog's fur.
-   */
-  public Color getHairColor() {
+    /**
+     * Provide the color of the dog's hair.
+     *
+     * @return Color of the dog's fur.
+     */
+    public Color getHairColor() {
     return hairColor;
   }
 

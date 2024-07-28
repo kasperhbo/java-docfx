@@ -7,6 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The type Toc file.
+ */
 public class TocFile extends ArrayList<TocItem> implements YmlFile {
 
     private static final String  TOC_FILE_HEADER = "### YamlMime:TableOfContent\n";
@@ -17,6 +20,14 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
 
     private final boolean disableLibraryOverview;
 
+    /**
+     * Instantiates a new Toc file.
+     *
+     * @param outputPath             the output path
+     * @param projectName            the project name
+     * @param disableChangelog       the disable changelog
+     * @param disableLibraryOverview the disable library overview
+     */
     public TocFile(
             String outputPath,
             String projectName,
@@ -29,10 +40,18 @@ public class TocFile extends ArrayList<TocItem> implements YmlFile {
         this.disableLibraryOverview = disableLibraryOverview;
     }
 
+    /**
+     * Add toc item.
+     *
+     * @param packageTocItem the package toc item
+     */
     public void addTocItem(TocItem packageTocItem) {
         add(packageTocItem);
     }
 
+    /**
+     * Sort by uid.
+     */
     protected void sortByUid() {
         this.sort((a, b) -> a.getUid().compareToIgnoreCase(b.getUid()));
     }

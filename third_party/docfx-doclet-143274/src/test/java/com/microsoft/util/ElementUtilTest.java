@@ -17,14 +17,23 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Element util test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class ElementUtilTest {
 
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private ElementUtil elementUtil;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     elementUtil =
@@ -33,7 +42,10 @@ public class ElementUtilTest {
             new String[] {"com\\.microsoft\\..*SomeExcludedClass"});
   }
 
-  @Test
+    /**
+     * Extract package elements.
+     */
+    @Test
   public void extractPackageElements() {
     Set<? extends Element> elementsSet =
         new HashSet<>() {
@@ -54,7 +66,10 @@ public class ElementUtilTest {
     assertEquals("Unexpected second item", result.get(1), "com.microsoft.samples.subpackage");
   }
 
-  @Test
+    /**
+     * Extract sorted elements.
+     */
+    @Test
   public void extractSortedElements() {
     Element element = elements.getPackageElement("com.microsoft.samples.subpackage");
 
@@ -91,7 +106,10 @@ public class ElementUtilTest {
         "com.microsoft.samples.subpackage.Person");
   }
 
-  @Test
+    /**
+     * Match any pattern.
+     */
+    @Test
   public void matchAnyPattern() {
     HashSet<Pattern> patterns =
         new HashSet<>(

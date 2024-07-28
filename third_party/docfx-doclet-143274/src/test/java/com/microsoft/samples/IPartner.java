@@ -12,12 +12,12 @@ package com.microsoft.samples;
  * customers, profiles, and customer orders, profiles and subscriptions and more.
  */
 public interface IPartner {
-  /**
-   * Gets the partner credentials.
-   *
-   * @return The partner credentials.
-   */
-  String getCredentials();
+    /**
+     * Gets the partner credentials.
+     *
+     * @return The partner credentials.
+     */
+    String getCredentials();
 
   /**
    * Gets the request context.

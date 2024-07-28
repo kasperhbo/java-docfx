@@ -22,14 +22,28 @@ import com.microsoft.model.MetadataFileItem;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Project builder.
+ */
 class ProjectBuilder {
   private final String projectName;
 
-  ProjectBuilder(String projectName) {
+    /**
+     * Instantiates a new Project builder.
+     *
+     * @param projectName the project name
+     */
+    ProjectBuilder(String projectName) {
     this.projectName = projectName;
   }
 
-  void buildProjectMetadataFile(
+    /**
+     * Build project metadata file.
+     *
+     * @param packageItems        the package items
+     * @param projectMetadataFile the project metadata file
+     */
+    void buildProjectMetadataFile(
       List<MetadataFileItem> packageItems, MetadataFile projectMetadataFile) {
     MetadataFileItem projectItem = new MetadataFileItem(LANGS, projectName);
     projectItem.setNameWithType(projectName);

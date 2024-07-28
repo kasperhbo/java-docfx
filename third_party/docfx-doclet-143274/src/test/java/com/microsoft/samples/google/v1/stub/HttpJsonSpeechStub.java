@@ -53,6 +53,7 @@ import java.util.concurrent.TimeUnit;
 import javax.annotation.Generated;
 
 // AUTO-GENERATED DOCUMENTATION AND CLASS.
+
 /**
  * REST stub implementation for the Speech service API.
  *
@@ -153,36 +154,67 @@ public class HttpJsonSpeechStub extends SpeechStub {
   private final HttpJsonOperationsStub httpJsonOperationsStub;
   private final HttpJsonStubCallableFactory callableFactory;
 
-  public static final HttpJsonSpeechStub create(SpeechStubSettings settings) throws IOException {
+    /**
+     * Create http json speech stub.
+     *
+     * @param settings the settings
+     * @return the http json speech stub
+     * @throws IOException the io exception
+     */
+    public static final HttpJsonSpeechStub create(SpeechStubSettings settings) throws IOException {
     return new HttpJsonSpeechStub(settings, ClientContext.create(settings));
   }
 
-  public static final HttpJsonSpeechStub create(ClientContext clientContext) throws IOException {
+    /**
+     * Create http json speech stub.
+     *
+     * @param clientContext the client context
+     * @return the http json speech stub
+     * @throws IOException the io exception
+     */
+    public static final HttpJsonSpeechStub create(ClientContext clientContext) throws IOException {
     return new HttpJsonSpeechStub(SpeechStubSettings.newHttpJsonBuilder().build(), clientContext);
   }
 
-  public static final HttpJsonSpeechStub create(
+    /**
+     * Create http json speech stub.
+     *
+     * @param clientContext   the client context
+     * @param callableFactory the callable factory
+     * @return the http json speech stub
+     * @throws IOException the io exception
+     */
+    public static final HttpJsonSpeechStub create(
       ClientContext clientContext, HttpJsonStubCallableFactory callableFactory) throws IOException {
     return new HttpJsonSpeechStub(
         SpeechStubSettings.newHttpJsonBuilder().build(), clientContext, callableFactory);
   }
 
-  /**
-   * Constructs an instance of HttpJsonSpeechStub, using the given settings. This is protected so
-   * that it is easy to make a subclass, but otherwise, the static factory methods should be
-   * preferred.
-   */
-  protected HttpJsonSpeechStub(SpeechStubSettings settings, ClientContext clientContext)
+    /**
+     * Constructs an instance of HttpJsonSpeechStub, using the given settings. This is protected so
+     * that it is easy to make a subclass, but otherwise, the static factory methods should be
+     * preferred.
+     *
+     * @param settings      the settings
+     * @param clientContext the client context
+     * @throws IOException the io exception
+     */
+    protected HttpJsonSpeechStub(SpeechStubSettings settings, ClientContext clientContext)
       throws IOException {
     this(settings, clientContext, new HttpJsonSpeechCallableFactory());
   }
 
-  /**
-   * Constructs an instance of HttpJsonSpeechStub, using the given settings. This is protected so
-   * that it is easy to make a subclass, but otherwise, the static factory methods should be
-   * preferred.
-   */
-  protected HttpJsonSpeechStub(
+    /**
+     * Constructs an instance of HttpJsonSpeechStub, using the given settings. This is protected so
+     * that it is easy to make a subclass, but otherwise, the static factory methods should be
+     * preferred.
+     *
+     * @param settings        the settings
+     * @param clientContext   the client context
+     * @param callableFactory the callable factory
+     * @throws IOException the io exception
+     */
+    protected HttpJsonSpeechStub(
       SpeechStubSettings settings,
       ClientContext clientContext,
       HttpJsonStubCallableFactory callableFactory)
@@ -233,7 +265,12 @@ public class HttpJsonSpeechStub extends SpeechStub {
         new BackgroundResourceAggregation(clientContext.getBackgroundResources());
   }
 
-  @InternalApi
+    /**
+     * Gets method descriptors.
+     *
+     * @return the method descriptors
+     */
+    @InternalApi
   public static List<ApiMethodDescriptor> getMethodDescriptors() {
     List<ApiMethodDescriptor> methodDescriptors = new ArrayList<>();
     methodDescriptors.add(recognizeMethodDescriptor);

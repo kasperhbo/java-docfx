@@ -20,9 +20,15 @@ import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
+/**
+ * The type Status test.
+ */
 public class StatusTest {
 
-  @Test
+    /**
+     * Status name.
+     */
+    @Test
   public void statusName() {
     String name = Status.DEPRECATED.toString();
     assertEquals("Status should be deprecated", name, "deprecated");

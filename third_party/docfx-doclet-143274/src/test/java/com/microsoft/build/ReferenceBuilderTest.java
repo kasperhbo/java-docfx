@@ -31,11 +31,17 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+/**
+ * The type Reference builder test.
+ */
 public class ReferenceBuilderTest {
 
   private ReferenceBuilder referenceBuilder;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     DocletEnvironment environment = Mockito.mock(DocletEnvironment.class);
     ElementUtil elementUtil = new ElementUtil(new String[0], new String[0]);
@@ -43,7 +49,10 @@ public class ReferenceBuilderTest {
     referenceBuilder = new ReferenceBuilder(environment, classLookup, elementUtil);
   }
 
-  @Test
+    /**
+     * Expand complex generics in references.
+     */
+    @Test
   public void expandComplexGenericsInReferences() {
     MetadataFile classMetadataFile = new MetadataFile("path", "name");
     MetadataFileItem referenceItem = new MetadataFileItem("a.b.c.List<df.mn.ClassOne<tr.T>>");
@@ -62,7 +71,10 @@ public class ReferenceBuilderTest {
     assertTrue("Wrong references content", content.contains("a.b.c.List<df.mn.ClassOne<tr.T>>"));
   }
 
-  // todo add test case to cover reference item with in package
+    /**
+     * Build ref item.
+     */
+// todo add test case to cover reference item with in package
   @Test
   public void buildRefItem() {
     buildRefItemAndCheckAssertions("java.lang.Some.String", "java.lang.Some.String", "String");
@@ -85,7 +97,10 @@ public class ReferenceBuilderTest {
         RegExUtils.removeAll(expectedUid, "\\[\\]$"));
   }
 
-  @Test
+    /**
+     * Gets java reference href.
+     */
+    @Test
   public void getJavaReferenceHref() {
     String result1 = referenceBuilder.getJavaReferenceHref("java.lang.Object");
     String result2 =

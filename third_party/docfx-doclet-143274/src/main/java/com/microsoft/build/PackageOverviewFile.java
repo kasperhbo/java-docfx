@@ -14,6 +14,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.lang.model.element.PackageElement;
 
+/**
+ * The type Package overview file.
+ */
 public class PackageOverviewFile {
   private String CLIENT_TABLE_HEADER = "";
   private String SETTINGS_TABLE_HEADER = "";
@@ -76,7 +79,20 @@ public class PackageOverviewFile {
 
   private final PackageElement packageElement;
 
-  public PackageOverviewFile(
+    /**
+     * Instantiates a new Package overview file.
+     *
+     * @param outputPath         the output path
+     * @param fileName           the file name
+     * @param repoMetadata       the repo metadata
+     * @param packageElement     the package element
+     * @param status             the status
+     * @param packageLookup      the package lookup
+     * @param referenceBuilder   the reference builder
+     * @param artifactVersion    the artifact version
+     * @param recommendedPackage the recommended package
+     */
+    public PackageOverviewFile(
       String outputPath,
       String fileName,
       RepoMetadata repoMetadata,
@@ -301,7 +317,12 @@ public class PackageOverviewFile {
     }
   }
 
-  @JsonIgnore
+    /**
+     * Gets file content.
+     *
+     * @return the file content
+     */
+    @JsonIgnore
   public String getFileContent() {
     return PACKAGE_HEADER
         + GITHUB_SOURCE_TABLE
@@ -334,16 +355,32 @@ public class PackageOverviewFile {
         + EXCEPTION_TABLE;
   }
 
-  /**
-   * Class that contains the information about an element of a class used to populate the tables in
-   * the Package Overview file
-   */
-  public static class PackageChildSummary {
-    String uid;
-    String type;
-    String summary;
+    /**
+     * Class that contains the information about an element of a class used to populate the tables in
+     * the Package Overview file
+     */
+    public static class PackageChildSummary {
+        /**
+         * The Uid.
+         */
+        String uid;
+        /**
+         * The Type.
+         */
+        String type;
+        /**
+         * The Summary.
+         */
+        String summary;
 
-    public PackageChildSummary(String uid, String type, String summary) {
+        /**
+         * Instantiates a new Package child summary.
+         *
+         * @param uid     the uid
+         * @param type    the type
+         * @param summary the summary
+         */
+        public PackageChildSummary(String uid, String type, String summary) {
       this.uid = uid;
       this.type = type;
       this.summary = summary;
@@ -399,8 +436,13 @@ public class PackageOverviewFile {
     return tableBuilder.toString();
   }
 
-  /** Use to get the recommended package URL for Package Overview */
-  public static ImmutableList<Object> extractPackageBaseURIBeforeVersion(
+    /**
+     * Use to get the recommended package URL for Package Overview  @param input the input
+     *
+     * @param pattern the pattern
+     * @return the immutable list
+     */
+    public static ImmutableList<Object> extractPackageBaseURIBeforeVersion(
       String input, Pattern pattern) {
     Matcher matcher = pattern.matcher(input);
     boolean isVersioned = matcher.find();
@@ -415,17 +457,32 @@ public class PackageOverviewFile {
     }
   }
 
-  @JsonIgnore
+    /**
+     * Gets file name with path.
+     *
+     * @return the file name with path
+     */
+    @JsonIgnore
   public String getFileNameWithPath() {
     return outputPath + File.separator + fileName;
   }
 
-  @JsonIgnore
+    /**
+     * Gets file name.
+     *
+     * @return the file name
+     */
+    @JsonIgnore
   public String getFileName() {
     return fileName;
   }
 
-  public void setFileName(String fileName) {
+    /**
+     * Sets file name.
+     *
+     * @param fileName the file name
+     */
+    public void setFileName(String fileName) {
     this.fileName = fileName;
   }
 }

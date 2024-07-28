@@ -21,9 +21,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 import javax.lang.model.element.ElementKind;
 
+/**
+ * The type Toc type map.
+ */
 public class TocTypeMap extends HashMap<String, ArrayList<TocItem>> {
 
-  public TocTypeMap() {
+    /**
+     * Instantiates a new Toc type map.
+     */
+    public TocTypeMap() {
     this.put(ElementKind.CLASS.name(), new ArrayList<>());
     this.put(ElementKind.INTERFACE.name(), new ArrayList<>());
     this.put(ElementKind.ENUM.name(), new ArrayList<>());
@@ -31,7 +37,12 @@ public class TocTypeMap extends HashMap<String, ArrayList<TocItem>> {
     this.put("EXCEPTION", new ArrayList<>());
   }
 
-  public List<KindTitle> getTitleList() {
+    /**
+     * Gets title list.
+     *
+     * @return the title list
+     */
+    public List<KindTitle> getTitleList() {
     return List.of(
         new KindTitle(ElementKind.INTERFACE.name(), "Interfaces"),
         new KindTitle(ElementKind.CLASS.name(), "Classes"),
@@ -40,7 +51,12 @@ public class TocTypeMap extends HashMap<String, ArrayList<TocItem>> {
         new KindTitle("EXCEPTION", "Exceptions"));
   }
 
-  public List<TocItem> toList() {
+    /**
+     * To list list.
+     *
+     * @return the list
+     */
+    public List<TocItem> toList() {
     return getTitleList().stream()
         .filter(kindTitle -> get(kindTitle.getElementKind()).size() > 0)
         .flatMap(

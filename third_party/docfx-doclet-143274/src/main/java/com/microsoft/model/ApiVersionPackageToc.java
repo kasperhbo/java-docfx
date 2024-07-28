@@ -5,24 +5,66 @@ import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+/**
+ * The type Api version package toc.
+ */
 public class ApiVersionPackageToc {
-  static final String CLIENTS = "Clients";
-  static final String REQUESTS_AND_RESPONSES = "Requests and responses";
-  static final String SETTINGS = "Settings";
-  static final String ALL_OTHERS = "All other classes and interfaces";
-  static final String BUILDERS = "Builders";
-  static final String ENUMS = "Enums";
-  static final String INTERFACES = "Interfaces";
-  static final String MESSAGES = "Messages";
-  static final String EXCEPTIONS = "Exceptions";
-  static final String PAGING = "Paging";
-  static final String RESOURCE_NAMES = "Resource names";
-  static final String UNCATEGORIZED = "Other";
+    /**
+     * The Clients.
+     */
+    static final String CLIENTS = "Clients";
+    /**
+     * The Requests and responses.
+     */
+    static final String REQUESTS_AND_RESPONSES = "Requests and responses";
+    /**
+     * The Settings.
+     */
+    static final String SETTINGS = "Settings";
+    /**
+     * The All others.
+     */
+    static final String ALL_OTHERS = "All other classes and interfaces";
+    /**
+     * The Builders.
+     */
+    static final String BUILDERS = "Builders";
+    /**
+     * The Enums.
+     */
+    static final String ENUMS = "Enums";
+    /**
+     * The Interfaces.
+     */
+    static final String INTERFACES = "Interfaces";
+    /**
+     * The Messages.
+     */
+    static final String MESSAGES = "Messages";
+    /**
+     * The Exceptions.
+     */
+    static final String EXCEPTIONS = "Exceptions";
+    /**
+     * The Paging.
+     */
+    static final String PAGING = "Paging";
+    /**
+     * The Resource names.
+     */
+    static final String RESOURCE_NAMES = "Resource names";
+    /**
+     * The Uncategorized.
+     */
+    static final String UNCATEGORIZED = "Other";
 
   private final LinkedHashMap<String, List<TocItem>> visibleCategories = new LinkedHashMap<>();
   private final LinkedHashMap<String, List<TocItem>> hiddenCategories = new LinkedHashMap<>();
 
-  public ApiVersionPackageToc() {
+    /**
+     * Instantiates a new Api version package toc.
+     */
+    public ApiVersionPackageToc() {
     // Order here determines final organization order.
     visibleCategories.put(CLIENTS, new ArrayList<>());
     visibleCategories.put(SETTINGS, new ArrayList<>());
@@ -38,52 +80,109 @@ public class ApiVersionPackageToc {
     hiddenCategories.put(UNCATEGORIZED, new ArrayList<>());
   }
 
-  public void addClient(TocItem tocItem) {
+    /**
+     * Add client.
+     *
+     * @param tocItem the toc item
+     */
+    public void addClient(TocItem tocItem) {
     visibleCategories.get(CLIENTS).add(tocItem);
   }
 
-  public void addRequestOrResponse(TocItem tocItem) {
+    /**
+     * Add request or response.
+     *
+     * @param tocItem the toc item
+     */
+    public void addRequestOrResponse(TocItem tocItem) {
     visibleCategories.get(REQUESTS_AND_RESPONSES).add(tocItem);
   }
 
-  public void addSettings(TocItem tocItem) {
+    /**
+     * Add settings.
+     *
+     * @param tocItem the toc item
+     */
+    public void addSettings(TocItem tocItem) {
     visibleCategories.get(SETTINGS).add(tocItem);
   }
 
-  public void addBuilder(TocItem tocItem) {
+    /**
+     * Add builder.
+     *
+     * @param tocItem the toc item
+     */
+    public void addBuilder(TocItem tocItem) {
     hiddenCategories.get(BUILDERS).add(tocItem);
   }
 
-  public void addEnum(TocItem tocItem) {
+    /**
+     * Add enum.
+     *
+     * @param tocItem the toc item
+     */
+    public void addEnum(TocItem tocItem) {
     hiddenCategories.get(ENUMS).add(tocItem);
   }
 
-  public void addException(TocItem tocItem) {
+    /**
+     * Add exception.
+     *
+     * @param tocItem the toc item
+     */
+    public void addException(TocItem tocItem) {
     hiddenCategories.get(EXCEPTIONS).add(tocItem);
   }
 
-  public void addInterface(TocItem tocItem) {
+    /**
+     * Add interface.
+     *
+     * @param tocItem the toc item
+     */
+    public void addInterface(TocItem tocItem) {
     hiddenCategories.get(INTERFACES).add(tocItem);
   }
 
-  public void addMessage(TocItem tocItem) {
+    /**
+     * Add message.
+     *
+     * @param tocItem the toc item
+     */
+    public void addMessage(TocItem tocItem) {
     hiddenCategories.get(MESSAGES).add(tocItem);
   }
 
-  public void addUncategorized(TocItem tocItem) {
+    /**
+     * Add uncategorized.
+     *
+     * @param tocItem the toc item
+     */
+    public void addUncategorized(TocItem tocItem) {
     hiddenCategories.get(UNCATEGORIZED).add(tocItem);
   }
 
-  public void addPaging(TocItem tocItem) {
+    /**
+     * Add paging.
+     *
+     * @param tocItem the toc item
+     */
+    public void addPaging(TocItem tocItem) {
     hiddenCategories.get(PAGING).add(tocItem);
   }
 
-  public void addResourceName(TocItem tocItem) {
+    /**
+     * Add resource name.
+     *
+     * @param tocItem the toc item
+     */
+    public void addResourceName(TocItem tocItem) {
     hiddenCategories.get(RESOURCE_NAMES).add(tocItem);
   }
 
-  /** Build a list of TocItems for inclusion in the library's table of contents */
-  public List<TocItem> toList() {
+    /**
+     * Build a list of TocItems for inclusion in the library's table of contents  @return the list
+     */
+    public List<TocItem> toList() {
     List<TocItem> toc = new ArrayList<>();
 
     visibleCategories.forEach(

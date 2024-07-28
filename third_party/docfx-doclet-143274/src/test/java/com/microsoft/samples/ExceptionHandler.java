@@ -32,7 +32,9 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.concurrent.Callable;
 
-/** Exception retry algorithm implementation used by {@link RetryHelper}. */
+/**
+ * Exception retry algorithm implementation used by {@link RetryHelper}.
+ */
 @BetaApi
 public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Serializable {
 
@@ -46,38 +48,53 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
   private final ImmutableSet<Class<? extends Exception>> nonRetriableExceptions;
   private final Set<RetryInfo> retryInfo = Sets.newHashSet();
 
-  public interface Interceptor extends Serializable {
+    /**
+     * The interface Interceptor.
+     */
+    public interface Interceptor extends Serializable {
 
-    enum RetryResult {
-      NO_RETRY,
-      RETRY,
-      CONTINUE_EVALUATION;
+        /**
+         * The enum Retry result.
+         */
+        enum RetryResult {
+            /**
+             * No retry retry result.
+             */
+            NO_RETRY,
+            /**
+             * Retry retry result.
+             */
+            RETRY,
+            /**
+             * Continue evaluation retry result.
+             */
+            CONTINUE_EVALUATION;
     }
 
-    /**
-     * This method is called before exception evaluation and could short-circuit the process.
-     *
-     * @param exception the exception that is being evaluated
-     * @return {@link RetryResult} to indicate if the exception should be ignored ( {@link
-     *     RetryResult#RETRY}), propagated ({@link RetryResult#NO_RETRY}), or evaluation should
-     *     proceed ({@link RetryResult#CONTINUE_EVALUATION}).
-     */
-    RetryResult beforeEval(Exception exception);
+        /**
+         * This method is called before exception evaluation and could short-circuit the process.
+         *
+         * @param exception the exception that is being evaluated
+         * @return {@link RetryResult} to indicate if the exception should be ignored ( {@link
+         * RetryResult#RETRY}), propagated ({@link RetryResult#NO_RETRY}), or evaluation should     proceed ({@link RetryResult#CONTINUE_EVALUATION}).
+         */
+        RetryResult beforeEval(Exception exception);
 
-    /**
-     * This method is called after the evaluation and could alter its result.
-     *
-     * @param exception the exception that is being evaluated
-     * @param retryResult the result of the evaluation so far
-     * @return {@link RetryResult} to indicate if the exception should be ignored ( {@link
-     *     RetryResult#RETRY}), propagated ({@link RetryResult#NO_RETRY}), or evaluation should
-     *     proceed ({@link RetryResult#CONTINUE_EVALUATION}).
-     */
-    RetryResult afterEval(Exception exception, RetryResult retryResult);
+        /**
+         * This method is called after the evaluation and could alter its result.
+         *
+         * @param exception   the exception that is being evaluated
+         * @param retryResult the result of the evaluation so far
+         * @return {@link RetryResult} to indicate if the exception should be ignored ( {@link
+         * RetryResult#RETRY}), propagated ({@link RetryResult#NO_RETRY}), or evaluation should     proceed ({@link RetryResult#CONTINUE_EVALUATION}).
+         */
+        RetryResult afterEval(Exception exception, RetryResult retryResult);
   }
 
-  /** ExceptionHandler builder. */
-  public static class Builder {
+    /**
+     * ExceptionHandler builder.
+     */
+    public static class Builder {
 
     private final ImmutableList.Builder<Interceptor> interceptors = ImmutableList.builder();
     private final ImmutableSet.Builder<Class<? extends Exception>> retriableExceptions =
@@ -87,26 +104,26 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
 
     private Builder() {}
 
-    /**
-     * Adds the exception handler interceptors. Call order will be maintained.
-     *
-     * @param interceptors the interceptors for this exception handler
-     * @return the Builder for chaining
-     */
-    public Builder addInterceptors(Interceptor... interceptors) {
+        /**
+         * Adds the exception handler interceptors. Call order will be maintained.
+         *
+         * @param interceptors the interceptors for this exception handler
+         * @return the Builder for chaining
+         */
+        public Builder addInterceptors(Interceptor... interceptors) {
       for (Interceptor interceptor : interceptors) {
         this.interceptors.add(interceptor);
       }
       return this;
     }
 
-    /**
-     * Add the exceptions to ignore/retry-on.
-     *
-     * @param exceptions retry should continue when such exceptions are thrown
-     * @return the Builder for chaining
-     */
-    @SafeVarargs
+        /**
+         * Add the exceptions to ignore/retry-on.
+         *
+         * @param exceptions retry should continue when such exceptions are thrown
+         * @return the Builder for chaining
+         */
+        @SafeVarargs
     public final Builder retryOn(Class<? extends Exception>... exceptions) {
       for (Class<? extends Exception> exception : exceptions) {
         retriableExceptions.add(checkNotNull(exception));
@@ -114,13 +131,13 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
       return this;
     }
 
-    /**
-     * Adds the exceptions to abort on.
-     *
-     * @param exceptions retry should abort when such exceptions are thrown
-     * @return the Builder for chaining
-     */
-    @SafeVarargs
+        /**
+         * Adds the exceptions to abort on.
+         *
+         * @param exceptions retry should abort when such exceptions are thrown
+         * @return the Builder for chaining
+         */
+        @SafeVarargs
     public final Builder abortOn(Class<? extends Exception>... exceptions) {
       for (Class<? extends Exception> exception : exceptions) {
         nonRetriableExceptions.add(checkNotNull(exception));
@@ -128,13 +145,18 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
       return this;
     }
 
-    /** Returns a new ExceptionHandler instance. */
-    public ExceptionHandler build() {
+        /**
+         * Returns a new ExceptionHandler instance.  @return the exception handler
+         */
+        public ExceptionHandler build() {
       return new ExceptionHandler(this);
     }
   }
 
-  @VisibleForTesting
+    /**
+     * The type Retry info.
+     */
+    @VisibleForTesting
   static final class RetryInfo implements Serializable {
 
     private static final long serialVersionUID = -4264634837841455974L;
@@ -142,7 +164,13 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
     private final Interceptor.RetryResult retry;
     private final Set<RetryInfo> children = Sets.newHashSet();
 
-    RetryInfo(Class<? extends Exception> exception, Interceptor.RetryResult retry) {
+        /**
+         * Instantiates a new Retry info.
+         *
+         * @param exception the exception
+         * @param retry     the retry
+         */
+        RetryInfo(Class<? extends Exception> exception, Interceptor.RetryResult retry) {
       this.exception = checkNotNull(exception);
       this.retry = checkNotNull(retry);
     }
@@ -218,7 +246,12 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
     }
   }
 
-  void verifyCaller(Callable<?> callable) {
+    /**
+     * Verify caller.
+     *
+     * @param callable the callable
+     */
+    void verifyCaller(Callable<?> callable) {
     Method callMethod = getCallableMethod(callable.getClass());
     for (Class<?> exceptionOrError : callMethod.getExceptionTypes()) {
       Preconditions.checkArgument(
@@ -285,12 +318,19 @@ public final class ExceptionHandler implements ResultRetryAlgorithm<Object>, Ser
         && Objects.equals(retryInfo, other.retryInfo);
   }
 
-  /** Returns an instance which retry any checked exception and abort on any runtime exception. */
-  public static ExceptionHandler getDefaultInstance() {
+    /**
+     * Returns an instance which retry any checked exception and abort on any runtime exception.  @return the default instance
+     */
+    public static ExceptionHandler getDefaultInstance() {
     return DEFAULT_INSTANCE;
   }
 
-  public static Builder newBuilder() {
+    /**
+     * New builder builder.
+     *
+     * @return the builder
+     */
+    public static Builder newBuilder() {
     return new Builder();
   }
 }

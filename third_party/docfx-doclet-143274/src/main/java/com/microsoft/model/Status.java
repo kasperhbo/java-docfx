@@ -16,10 +16,22 @@
 
 package com.microsoft.model;
 
+/**
+ * The enum Status.
+ */
 public enum Status {
-  DEPRECATED,
-  ALPHA,
-  BETA;
+    /**
+     * Deprecated status.
+     */
+    DEPRECATED,
+    /**
+     * Alpha status.
+     */
+    ALPHA,
+    /**
+     * Beta status.
+     */
+    BETA;
 
   @Override
   public String toString() {

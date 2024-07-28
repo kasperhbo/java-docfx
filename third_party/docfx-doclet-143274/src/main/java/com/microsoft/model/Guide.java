@@ -16,6 +16,9 @@
 
 package com.microsoft.model;
 
+/**
+ * The type Guide.
+ */
 //  for including guides with toc items
 // [items: [name: Overview,
 //          href: overview.html,
@@ -27,16 +30,32 @@ public class Guide {
   private final String name;
   private final String href;
 
-  public Guide(String name, String href) {
+    /**
+     * Instantiates a new Guide.
+     *
+     * @param name the name
+     * @param href the href
+     */
+    public Guide(String name, String href) {
     this.name = name;
     this.href = href;
   }
 
-  public String getName() {
+    /**
+     * Gets name.
+     *
+     * @return the name
+     */
+    public String getName() {
     return name;
   }
 
-  public String getHref() {
+    /**
+     * Gets href.
+     *
+     * @return the href
+     */
+    public String getHref() {
     return href;
   }
 }

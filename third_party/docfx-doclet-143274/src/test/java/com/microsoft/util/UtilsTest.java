@@ -15,34 +15,52 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
+/**
+ * The type Utils test.
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class UtilsTest {
 
-  @Rule public CompilationRule rule = new CompilationRule();
+    /**
+     * The Rule.
+     */
+    @Rule public CompilationRule rule = new CompilationRule();
   private Elements elements;
   private List<Element> allElements;
 
-  @Before
+    /**
+     * Sets .
+     */
+    @Before
   public void setup() {
     elements = rule.getElements();
     Element element = elements.getTypeElement("com.microsoft.samples.SuperHero");
     allElements = element.getEnclosedElements().stream().collect(Collectors.toList());
   }
 
-  // Test isPackagePrivate() method
+    /**
+     * Is package private true package private method.
+     */
+// Test isPackagePrivate() method
   @Test
   public void isPackagePrivate_True_PackagePrivateMethod() {
     Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHobby()");
     assertTrue(Utils.isPackagePrivate(method));
   }
 
-  @Test
+    /**
+     * Is package private true package private field.
+     */
+    @Test
   public void isPackagePrivate_True_PackagePrivateField() {
     Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "hobby");
     assertTrue(Utils.isPackagePrivate(field));
   }
 
-  // Test isPrivate() method
+    /**
+     * Is private true private method.
+     */
+// Test isPrivate() method
   @Test
   public void isPrivate_True_PrivateMethod() {
     Element method =
@@ -50,38 +68,56 @@ public class UtilsTest {
     assertTrue(Utils.isPrivate(method));
   }
 
-  @Test
+    /**
+     * Is private true private field.
+     */
+    @Test
   public void isPrivate_True_PrivateField() {
     Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "uniquePower");
     assertTrue(Utils.isPrivate(field));
   }
 
-  // Test isPrivateOrPackagePrivate() method
+    /**
+     * Is private or package private true package private method.
+     */
+// Test isPrivateOrPackagePrivate() method
   @Test
   public void isPrivateOrPackagePrivate_True_PackagePrivateMethod() {
     Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHobby()");
     assertTrue(Utils.isPrivateOrPackagePrivate(method));
   }
 
-  @Test
+    /**
+     * Is private or package private true private filed.
+     */
+    @Test
   public void isPrivateOrPackagePrivate_True_PrivateFiled() {
     Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "uniquePower");
     assertTrue(Utils.isPrivateOrPackagePrivate(field));
   }
 
-  @Test
+    /**
+     * Is private or package private false public method.
+     */
+    @Test
   public void isPrivateOrPackagePrivate_False_PublicMethod() {
     Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getUniquePower()");
     assertFalse(Utils.isPrivateOrPackagePrivate(method));
   }
 
-  @Test
+    /**
+     * Is private or package private false public field.
+     */
+    @Test
   public void isPrivateOrPackagePrivate_False_PublicField() {
     Element field = getElementByKindAndName(allElements, ElementKind.FIELD, "SOME_PUBLIC_STRING");
     assertFalse(Utils.isPrivateOrPackagePrivate(field));
   }
 
-  @Test
+    /**
+     * Is private or package private false protected method.
+     */
+    @Test
   public void isPrivateOrPackagePrivate_False_ProtectedMethod() {
     Element method = getElementByKindAndName(allElements, ElementKind.METHOD, "getHealth()");
     assertFalse(Utils.isPrivateOrPackagePrivate(method));

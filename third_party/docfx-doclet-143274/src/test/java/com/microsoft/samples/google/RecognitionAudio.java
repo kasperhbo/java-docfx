@@ -40,15 +40,13 @@ import com.google.cloud.speech.v1.RecognitionAudioOrBuilder;
 import com.google.protobuf.Message;
 
 /**
- *
- *
  * <pre>
  * Contains audio data in the encoding specified in the `RecognitionConfig`.
  * Either `content` or `uri` must be supplied. Supplying both or neither
  * returns [google.rpc.Code.INVALID_ARGUMENT][google.rpc.Code.INVALID_ARGUMENT]. See
  * [content limits](https://cloud.google.com/speech-to-text/quotas#content).
  * </pre>
- *
+ * <p>
  * Protobuf type {@code google.cloud.speech.v1.RecognitionAudio}
  */
 public final class RecognitionAudio extends com.google.protobuf.GeneratedMessageV3
@@ -153,30 +151,50 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     return null;
   }
 
-  public enum AudioSourceCase
+    /**
+     * The enum Audio source case.
+     */
+    public enum AudioSourceCase
       implements
           com.google.protobuf.Internal.EnumLite,
           com.google.protobuf.AbstractMessage.InternalOneOfEnum {
-    CONTENT(1),
-    URI(2),
-    AUDIOSOURCE_NOT_SET(0);
+        /**
+         * Content audio source case.
+         */
+        CONTENT(1),
+        /**
+         * Uri audio source case.
+         */
+        URI(2),
+        /**
+         * Audiosource not set audio source case.
+         */
+        AUDIOSOURCE_NOT_SET(0);
     private final int value;
 
     private AudioSourceCase(int value) {
       this.value = value;
     }
 
-    /**
-     * @param value The number of the enum to look for.
-     * @return The enum associated with the given number.
-     * @deprecated Use {@link #forNumber(int)} instead.
-     */
-    @java.lang.Deprecated
+        /**
+         * Value of audio source case.
+         *
+         * @param value The number of the enum to look for.
+         * @return The enum associated with the given number.
+         * @deprecated Use {@link #forNumber(int)} instead.
+         */
+        @java.lang.Deprecated
     public static AudioSourceCase valueOf(int value) {
       return forNumber(value);
     }
 
-    public static AudioSourceCase forNumber(int value) {
+        /**
+         * For number audio source case.
+         *
+         * @param value the value
+         * @return the audio source case
+         */
+        public static AudioSourceCase forNumber(int value) {
       switch (value) {
         case 1:
           return CONTENT;
@@ -198,7 +216,10 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     return com.google.cloud.speech.v1.RecognitionAudio.AudioSourceCase.forNumber(audioSourceCase_);
   }
 
-  public static final int CONTENT_FIELD_NUMBER = 1;
+    /**
+     * The constant CONTENT_FIELD_NUMBER.
+     */
+    public static final int CONTENT_FIELD_NUMBER = 1;
 
   /**
    *
@@ -239,7 +260,10 @@ public final class RecognitionAudio extends com.google.protobuf.GeneratedMessage
     return com.google.protobuf.ByteString.EMPTY;
   }
 
-  public static final int URI_FIELD_NUMBER = 2;
+    /**
+     * The constant URI_FIELD_NUMBER.
+     */
+    public static final int URI_FIELD_NUMBER = 2;
 
   /**
    *

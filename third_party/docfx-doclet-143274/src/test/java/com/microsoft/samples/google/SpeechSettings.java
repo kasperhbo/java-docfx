@@ -61,7 +61,7 @@ import javax.annotation.Generated;
  *             .setTotalTimeout(Duration.ofSeconds(30))
  *             .build());
  * SpeechSettings speechSettings = speechSettingsBuilder.build();
- * }</pre>
+ * }*</pre>
  */
 @BetaApi
 @InternalExtensionOnly
@@ -69,74 +69,115 @@ import javax.annotation.Generated;
 @SuppressWarnings("unchecked")
 public class SpeechSettings extends ClientSettings<SpeechSettings> {
 
-  /** Returns the object with the settings used for calls to recognize. */
-  public UnaryCallSettings<RecognizeRequest, RecognizeResponse> recognizeSettings() {
+    /**
+     * Returns the object with the settings used for calls to recognize.  @return the unary call settings
+     */
+    public UnaryCallSettings<RecognizeRequest, RecognizeResponse> recognizeSettings() {
     return ((SpeechStubSettings) getStubSettings()).recognizeSettings();
   }
 
-  /** Returns the object with the settings used for calls to longRunningRecognize. */
-  public UnaryCallSettings<LongRunningRecognizeRequest, Operation> longRunningRecognizeSettings() {
+    /**
+     * Returns the object with the settings used for calls to longRunningRecognize.  @return the unary call settings
+     */
+    public UnaryCallSettings<LongRunningRecognizeRequest, Operation> longRunningRecognizeSettings() {
     return ((SpeechStubSettings) getStubSettings()).longRunningRecognizeSettings();
   }
 
-  /** Returns the object with the settings used for calls to longRunningRecognize. */
-  public OperationCallSettings<
+    /**
+     * Returns the object with the settings used for calls to longRunningRecognize.  @return the operation call settings < long running recognize request , long running recognize response , long running recognize metadata >
+     */
+    public OperationCallSettings<
           LongRunningRecognizeRequest, LongRunningRecognizeResponse, LongRunningRecognizeMetadata>
       longRunningRecognizeOperationSettings() {
     return ((SpeechStubSettings) getStubSettings()).longRunningRecognizeOperationSettings();
   }
 
-  /** Returns the object with the settings used for calls to streamingRecognize. */
-  public StreamingCallSettings<StreamingRecognizeRequest, StreamingRecognizeResponse>
+    /**
+     * Returns the object with the settings used for calls to streamingRecognize.  @return the streaming call settings
+     */
+    public StreamingCallSettings<StreamingRecognizeRequest, StreamingRecognizeResponse>
       streamingRecognizeSettings() {
     return ((SpeechStubSettings) getStubSettings()).streamingRecognizeSettings();
   }
 
-  public static final SpeechSettings create(SpeechStubSettings stub) throws IOException {
+    /**
+     * Create speech settings.
+     *
+     * @param stub the stub
+     * @return the speech settings
+     * @throws IOException the io exception
+     */
+    public static final SpeechSettings create(SpeechStubSettings stub) throws IOException {
     return new Builder(stub.toBuilder()).build();
   }
 
-  /** Returns a builder for the default ExecutorProvider for this service. */
-  public static InstantiatingExecutorProvider.Builder defaultExecutorProviderBuilder() {
+    /**
+     * Returns a builder for the default ExecutorProvider for this service.  @return the instantiating executor provider . builder
+     */
+    public static InstantiatingExecutorProvider.Builder defaultExecutorProviderBuilder() {
     return SpeechStubSettings.defaultExecutorProviderBuilder();
   }
 
-  /** Returns the default service endpoint. */
-  public static String getDefaultEndpoint() {
+    /**
+     * Returns the default service endpoint.  @return the default endpoint
+     */
+    public static String getDefaultEndpoint() {
     return SpeechStubSettings.getDefaultEndpoint();
   }
 
-  /** Returns the default service scopes. */
-  public static List<String> getDefaultServiceScopes() {
+    /**
+     * Returns the default service scopes.  @return the default service scopes
+     */
+    public static List<String> getDefaultServiceScopes() {
     return SpeechStubSettings.getDefaultServiceScopes();
   }
 
-  /** Returns a builder for the default credentials for this service. */
-  public static GoogleCredentialsProvider.Builder defaultCredentialsProviderBuilder() {
+    /**
+     * Returns a builder for the default credentials for this service.  @return the google credentials provider . builder
+     */
+    public static GoogleCredentialsProvider.Builder defaultCredentialsProviderBuilder() {
     return SpeechStubSettings.defaultCredentialsProviderBuilder();
   }
 
-  /** Returns a builder for the default ChannelProvider for this service. */
-  public static InstantiatingGrpcChannelProvider.Builder defaultGrpcTransportProviderBuilder() {
+    /**
+     * Returns a builder for the default ChannelProvider for this service.  @return the instantiating grpc channel provider . builder
+     */
+    public static InstantiatingGrpcChannelProvider.Builder defaultGrpcTransportProviderBuilder() {
     return SpeechStubSettings.defaultGrpcTransportProviderBuilder();
   }
 
-  public static TransportChannelProvider defaultTransportChannelProvider() {
+    /**
+     * Default transport channel provider transport channel provider.
+     *
+     * @return the transport channel provider
+     */
+    public static TransportChannelProvider defaultTransportChannelProvider() {
     return SpeechStubSettings.defaultTransportChannelProvider();
   }
 
-  @BetaApi("The surface for customizing headers is not stable yet and may change in the future.")
+    /**
+     * Default api client header provider builder api client header provider . builder.
+     *
+     * @return the api client header provider . builder
+     */
+    @BetaApi("The surface for customizing headers is not stable yet and may change in the future.")
   public static ApiClientHeaderProvider.Builder defaultApiClientHeaderProviderBuilder() {
     return SpeechStubSettings.defaultApiClientHeaderProviderBuilder();
   }
 
-  /** Returns a new builder for this class. */
-  public static Builder newBuilder() {
+    /**
+     * Returns a new builder for this class.  @return the builder
+     */
+    public static Builder newBuilder() {
     return Builder.createDefault();
   }
 
-  /** Returns a new builder for this class. */
-  public static Builder newBuilder(ClientContext clientContext) {
+    /**
+     * Returns a new builder for this class.  @param clientContext the client context
+     *
+     * @return the builder
+     */
+    public static Builder newBuilder(ClientContext clientContext) {
     return new Builder(clientContext);
   }
 
@@ -145,26 +186,54 @@ public class SpeechSettings extends ClientSettings<SpeechSettings> {
     return new Builder(this);
   }
 
-  protected SpeechSettings(Builder settingsBuilder) throws IOException {
+    /**
+     * Instantiates a new Speech settings.
+     *
+     * @param settingsBuilder the settings builder
+     * @throws IOException the io exception
+     */
+    protected SpeechSettings(Builder settingsBuilder) throws IOException {
     super(settingsBuilder);
   }
 
-  /** Builder for SpeechSettings. */
-  public static class Builder extends ClientSettings.Builder<SpeechSettings, Builder> {
+    /**
+     * Builder for SpeechSettings.
+     */
+    public static class Builder extends ClientSettings.Builder<SpeechSettings, Builder> {
 
-    protected Builder() throws IOException {
+        /**
+         * Instantiates a new Builder.
+         *
+         * @throws IOException the io exception
+         */
+        protected Builder() throws IOException {
       this(((ClientContext) null));
     }
 
-    protected Builder(ClientContext clientContext) {
+        /**
+         * Instantiates a new Builder.
+         *
+         * @param clientContext the client context
+         */
+        protected Builder(ClientContext clientContext) {
       super(SpeechStubSettings.newBuilder(clientContext));
     }
 
-    protected Builder(SpeechSettings settings) {
+        /**
+         * Instantiates a new Builder.
+         *
+         * @param settings the settings
+         */
+        protected Builder(SpeechSettings settings) {
       super(settings.getStubSettings().toBuilder());
     }
 
-    protected Builder(SpeechStubSettings.Builder stubSettings) {
+        /**
+         * Instantiates a new Builder.
+         *
+         * @param stubSettings the stub settings
+         */
+        protected Builder(SpeechStubSettings.Builder stubSettings) {
       super(stubSettings);
     }
 
@@ -172,43 +241,61 @@ public class SpeechSettings extends ClientSettings<SpeechSettings> {
       return new Builder(SpeechStubSettings.newBuilder());
     }
 
-    public SpeechStubSettings.Builder getStubSettingsBuilder() {
+        /**
+         * Gets stub settings builder.
+         *
+         * @return the stub settings builder
+         */
+        public SpeechStubSettings.Builder getStubSettingsBuilder() {
       return ((SpeechStubSettings.Builder) getStubSettings());
     }
 
     // NEXT_MAJOR_VER: remove 'throws Exception'.
-    /**
-     * Applies the given settings updater function to all of the unary API methods in this service.
-     *
-     * <p>Note: This method does not support applying settings to streaming methods.
-     */
-    public Builder applyToAllUnaryMethods(
+
+        /**
+         * Applies the given settings updater function to all of the unary API methods in this service.
+         *
+         * <p>Note: This method does not support applying settings to streaming methods.
+         *
+         * @param settingsUpdater the settings updater
+         * @return the builder
+         * @throws Exception the exception
+         */
+        public Builder applyToAllUnaryMethods(
         ApiFunction<UnaryCallSettings.Builder<?, ?>, Void> settingsUpdater) throws Exception {
       super.applyToAllUnaryMethods(
           getStubSettingsBuilder().unaryMethodSettingsBuilders(), settingsUpdater);
       return this;
     }
 
-    /** Returns the builder for the settings used for calls to recognize. */
-    public UnaryCallSettings.Builder<RecognizeRequest, RecognizeResponse> recognizeSettings() {
+        /**
+         * Returns the builder for the settings used for calls to recognize.  @return the unary call settings . builder
+         */
+        public UnaryCallSettings.Builder<RecognizeRequest, RecognizeResponse> recognizeSettings() {
       return getStubSettingsBuilder().recognizeSettings();
     }
 
-    /** Returns the builder for the settings used for calls to longRunningRecognize. */
-    public UnaryCallSettings.Builder<LongRunningRecognizeRequest, Operation>
+        /**
+         * Returns the builder for the settings used for calls to longRunningRecognize.  @return the unary call settings . builder
+         */
+        public UnaryCallSettings.Builder<LongRunningRecognizeRequest, Operation>
         longRunningRecognizeSettings() {
       return getStubSettingsBuilder().longRunningRecognizeSettings();
     }
 
-    /** Returns the builder for the settings used for calls to longRunningRecognize. */
-    public OperationCallSettings.Builder<
+        /**
+         * Returns the builder for the settings used for calls to longRunningRecognize.  @return the operation call settings . builder < long running recognize request , long running recognize response , long running recognize metadata >
+         */
+        public OperationCallSettings.Builder<
             LongRunningRecognizeRequest, LongRunningRecognizeResponse, LongRunningRecognizeMetadata>
         longRunningRecognizeOperationSettings() {
       return getStubSettingsBuilder().longRunningRecognizeOperationSettings();
     }
 
-    /** Returns the builder for the settings used for calls to streamingRecognize. */
-    public StreamingCallSettings.Builder<StreamingRecognizeRequest, StreamingRecognizeResponse>
+        /**
+         * Returns the builder for the settings used for calls to streamingRecognize.  @return the streaming call settings . builder
+         */
+        public StreamingCallSettings.Builder<StreamingRecognizeRequest, StreamingRecognizeResponse>
         streamingRecognizeSettings() {
       return getStubSettingsBuilder().streamingRecognizeSettings();
     }
